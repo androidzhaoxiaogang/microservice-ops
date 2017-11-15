@@ -26,13 +26,6 @@ import org.springframework.context.annotation.Import;
 
 import com.yonyou.cloud.zuul.db.support.ZuulProxyStoreConfiguration;
 
-/**
- * Enables the Zuul Proxy with list of routes being provided from configured
- * {@link io.jmnarloch.spring.cloud.zuul.store.ZuulRouteStore} instance, besides that this pretty much resembles the
- * standard {@link org.springframework.cloud.netflix.zuul.EnableZuulProxy}.
- *
- * @author Jakub Narloch
- */
 @EnableCircuitBreaker
 @EnableDiscoveryClient
 @Retention(RetentionPolicy.RUNTIME)

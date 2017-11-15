@@ -27,56 +27,40 @@ import org.springframework.cloud.netflix.zuul.filters.discovery.DiscoveryClientR
 import com.yonyou.cloud.zuul.db.store.ZuulRouteStore;
 import com.yonyou.cloud.zuul.db.support.ZuulProxyStoreConfiguration;
 
-/**
- * A simple {@link org.springframework.cloud.netflix.zuul.filters.RouteLocator} that is being populated from configured
- * {@link ZuulRouteStore}.
- *
- * @author Jakub Narloch
- */
 public class StoreProxyRouteLocator extends DiscoveryClientRouteLocator {
 	private Logger logger=Logger.getLogger(StoreProxyRouteLocator.class);
 
     private final ZuulRouteStore store;
+    private ZuulProperties properties;
 
-    /**
-     * Creates new instance of {@link StoreProxyRouteLocator}
-     * @param servletPath the application servlet path
-     * @param discovery the discovery service
-     * @param properties the zuul properties
-     * @param store the route store
-     */
     public StoreProxyRouteLocator(String servletPath, DiscoveryClient discovery,
 			ZuulProperties properties,
                                   ZuulRouteStore store) {
         super(servletPath, discovery, properties);
         this.store = store;
+        this.properties=properties;
         addConfiguredRoutes(properties.getRoutes());
     }
+    
+    public void forceRefresh() {
+    	logger.info("--StoreProxyRouteLocator.forceRefresh");
+        addConfiguredRoutes(properties.getRoutes());
+    }
+    
     @Override
     protected LinkedHashMap<String, ZuulProperties.ZuulRoute> locateRoutes() {
-
+    	logger.info("--StoreProxyRouteLocator.locateRoutes");
 
         final LinkedHashMap<String, ZuulProperties.ZuulRoute> routesMap = new LinkedHashMap<String, ZuulProperties.ZuulRoute>();
         routesMap.putAll((Map<String, ZuulProperties.ZuulRoute>)super.locateRoutes());
         return routesMap;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     protected void addConfiguredRoutes(final Map<String, ZuulProperties.ZuulRoute> routes) {
     	logger.info("--StoreProxyRouteLocator.addConfiguredRoutes");
-//    protected Map<String, ZuulRoute> locateRoutes() {
-        
-//        LinkedHashMap<String, ZuulRoute> routesMap = new LinkedHashMap<String, ZuulRoute>();
-//        Map<String, ZuulRoute> tmp=super.locateRoutes();
-//        //从application.properties中加载路由信息
-//        routesMap.putAll(tmp);
-        //从db中加载路由信息
         for (ZuulProperties.ZuulRoute route : store.findAll()) {
         	routes.put(route.getPath(), route);
         }
-//        return routesMap;
     }
 }
