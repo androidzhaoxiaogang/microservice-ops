@@ -75,7 +75,8 @@ public class MqDataApi {
 		SearchResponse searchResponse  = client.prepareSearch(dbName)
 			.setTypes(tableName)
 			.setQuery(queryString==null||queryString.equals("")?QueryBuilders.matchAllQuery():QueryBuilders.queryStringQuery(queryString))
-			.setSearchType(SearchType.QUERY_THEN_FETCH)  
+			.setSearchType(SearchType.QUERY_THEN_FETCH) 
+			.setFrom(0)
 			.addSort("@timestamp", SortOrder.DESC)//排序 
 	        .get();  
 			
