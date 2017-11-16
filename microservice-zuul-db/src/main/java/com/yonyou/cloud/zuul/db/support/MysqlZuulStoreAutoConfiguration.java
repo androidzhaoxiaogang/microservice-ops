@@ -27,11 +27,6 @@ import com.yonyou.cloud.zuul.db.route.StoreProxyRouteLocator;
 import com.yonyou.cloud.zuul.db.store.MysqlZuulRouteStore;
 import com.yonyou.cloud.zuul.db.store.ZuulRouteStore;
 
-/**
- * Configures the Cassandra storage for Zuul routes.
- *
- * @author Jakub Narloch
- */
 @Configuration
 @ConditionalOnProperty(value = "zuul.store.mysql.enabled", havingValue = "true", matchIfMissing = false)
 public class MysqlZuulStoreAutoConfiguration {

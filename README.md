@@ -28,3 +28,10 @@ spring.datasource.url=jdbc:mysql://10.180.8.205:3306/ag_gate?useUnicode=true&amp
 spring.datasource.username=root
 spring.datasource.password=rcs
 ```
+- 刷新route配置
+
+```
+更新数据库后发送以下请求
+http://ip:port/inner/routes/refresh
+
+```

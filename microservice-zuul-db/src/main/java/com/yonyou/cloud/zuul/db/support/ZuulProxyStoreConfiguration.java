@@ -31,12 +31,6 @@ import com.yonyou.cloud.zuul.db.dao.RouteDao;
 import com.yonyou.cloud.zuul.db.route.StoreProxyRouteLocator;
 import com.yonyou.cloud.zuul.db.store.ZuulRouteStore;
 
-/**
- * Registers a {@link org.springframework.cloud.netflix.zuul.filters.RouteLocator} that is being populated through
- * external store.
- *
- * @author Jakub Narloch
- */
 @Configuration
 public class ZuulProxyStoreConfiguration extends ZuulProxyConfiguration {
 	private Logger logger=Logger.getLogger(ZuulProxyStoreConfiguration.class);
@@ -53,17 +47,8 @@ public class ZuulProxyStoreConfiguration extends ZuulProxyConfiguration {
     @Autowired
     private ServerProperties server;
 
-//	@Autowired
-    private RouteDao dao;
-    
-//    public ZuulProxyStoreConfiguration(){
-//    	super();
-//    	logger.info("--ZuulProxyStoreConfiguration.ZuulProxyStoreConfiguration()");
-//    }
-
     @Override
     public DiscoveryClientRouteLocator routeLocator() {
-//    	dao.find_All();
     	logger.info("--ZuulProxyStoreConfiguration.routeLocator");
         return new StoreProxyRouteLocator(server.getServletPath(),discovery, zuulProperties, zuulRouteStore);
     }
