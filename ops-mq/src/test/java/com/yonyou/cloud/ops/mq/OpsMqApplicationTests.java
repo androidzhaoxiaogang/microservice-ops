@@ -18,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.github.pagehelper.Page;
 import com.xiaoleilu.hutool.json.JSONObject;
 import com.xiaoleilu.hutool.json.JSONUtil;
@@ -26,6 +27,8 @@ import com.xiaoleilu.hutool.util.StrUtil;
 import com.yonyou.cloud.common.beans.PageResultResponse;
 import com.yonyou.cloud.ops.mq.dao.MqDataApi;
 import com.yonyou.cloud.ops.mq.entity.MqData;
+import com.yonyou.cloud.ops.mq.entity.MqProducer;
+import com.yonyou.cloud.ops.mq.service.MqProducerService;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -86,6 +89,31 @@ public class OpsMqApplicationTests {
 	public void test2(){
 		PageResultResponse<MqData> page = mqDataApi.pageQueryMqData(1, 20, "demo_mq", "track", "properties.column1:9ef524e9*", "@timestamp", "desc");
 		System.out.println(page.getData());
+		
+	}
+	
+	@Autowired
+	MqProducerService mqProducerService;
+	
+	
+	@Test
+	public void test3() throws JsonProcessingException{
+//		System.out.println("data===="+mqProducerService.selectOne("mq", "msgKey:cf2b37f5-7cf4-4391-8aeb-5eac8a17da84"));
+//		System.out.println("data===="+mqProducerService.selectList("mq", "msgKey:cf2b37f5-7cf4-4391-8aeb-5eac8a17da84"));
+		
+		MqProducer pro = new MqProducer();
+		pro.setData("666666");
+		pro.setHost("10");
+		pro.setMsg("msg");
+		pro.setSuccess("false");
+		pro.setMsgKey("bbbb");
+		
+//		mqProducerService.insert("mq", pro);
+		
+//		mqProducerService.update("mq",pro, "AV_JMnIaZG64QQzzpAPt");
+		
+//		System.out.println("data===="+mqProducerService.selectOne("mq", "_type:"));
+		System.out.println("dataList===="+mqProducerService.selectList("mq", "msg:msg AND msgKey:bb*").size());
 		
 	}
 }
