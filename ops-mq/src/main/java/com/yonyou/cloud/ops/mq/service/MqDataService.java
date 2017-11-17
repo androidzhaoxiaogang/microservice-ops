@@ -1,5 +1,6 @@
 package com.yonyou.cloud.ops.mq.service;
 
+import org.springframework.amqp.rabbit.annotation.RabbitHandler;
 import org.springframework.stereotype.Service;
 
 import com.yonyou.cloud.common.service.EsBaseService;
