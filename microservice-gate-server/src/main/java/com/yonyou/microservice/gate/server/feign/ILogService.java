@@ -9,7 +9,7 @@ import com.yonyou.microservice.gate.common.vo.log.LogInfo;
 /**
  * ${DESCRIPTION}
  *
- * @author wanghaobin
+ * @author joy
  * @create 2017-07-01 15:16
  */
 @FeignClient("ace-admin")

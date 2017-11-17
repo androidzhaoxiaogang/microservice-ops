@@ -6,7 +6,7 @@ import java.util.Date;
 /**
  * ${DESCRIPTION}
  *
- * @author wanghaobin
+ * @author joy
  * @create 2017-07-01 11:18
  */
 public class LogInfo implements Serializable{

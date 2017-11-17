@@ -3,7 +3,7 @@ package com.yonyou.microservice.gate.common.constant;
 /**
  * ${DESCRIPTION}
  *
- * @author wanghaobin
+ * @author joy
  * @create 2017-06-14 8:36
  */
 public class UserConstant {

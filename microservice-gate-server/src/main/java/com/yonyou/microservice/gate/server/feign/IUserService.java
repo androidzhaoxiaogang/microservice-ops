@@ -15,7 +15,7 @@ import com.yonyou.microservice.gate.server.config.ZuulConfig;
 /**
  * ${DESCRIPTION}
  *
- * @author wanghaobin
+ * @author joy
  * @create 2017-06-21 8:11
  */
 @FeignClient(value = "ace-admin",configuration = {ZuulConfig.class})

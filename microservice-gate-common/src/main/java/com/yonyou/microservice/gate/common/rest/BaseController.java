@@ -18,7 +18,7 @@ import java.util.Map;
 /**
  * ${DESCRIPTION}
  *
- * @author wanghaobin
+ * @author joy
  * @create 2017-06-15 8:48
  */
 public class BaseController<Biz extends BaseBiz,Entity> {

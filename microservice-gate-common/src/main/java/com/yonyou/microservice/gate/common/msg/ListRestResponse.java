@@ -3,7 +3,7 @@ package com.yonyou.microservice.gate.common.msg;
 /**
  * ${DESCRIPTION}
  *
- * @author wanghaobin
+ * @author joy
  * @create 2017-06-09 7:32
  */
 public class ListRestResponse<T> {
