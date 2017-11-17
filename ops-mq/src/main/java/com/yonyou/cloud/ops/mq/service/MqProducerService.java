@@ -4,10 +4,10 @@ import org.springframework.amqp.rabbit.annotation.RabbitHandler;
 import org.springframework.stereotype.Service;
 
 import com.yonyou.cloud.common.service.EsBaseService;
-import com.yonyou.cloud.ops.mq.entity.Track;
+import com.yonyou.cloud.ops.mq.entity.MqProducer;
 
 @Service
-public class MqDataService extends EsBaseService<Track>{
+public class MqProducerService extends EsBaseService<MqProducer>{
 
 //	@Autowired
 //	MqDataApi mqDataApi;

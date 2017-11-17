@@ -11,27 +11,26 @@ import com.yonyou.cloud.common.beans.PageResultResponse;
 import com.yonyou.cloud.common.beans.RestResultResponse;
 import com.yonyou.cloud.common.service.utils.ESPageQuery;
 import com.yonyou.cloud.ops.mq.entity.MqData;
-import com.yonyou.cloud.ops.mq.entity.Track;
-import com.yonyou.cloud.ops.mq.service.MqDataService;
+import com.yonyou.cloud.ops.mq.entity.MqProducer;
+import com.yonyou.cloud.ops.mq.service.MqProducerService;
 
 @RestController
 @RequestMapping("/mq")
 public class MqOpsController {
 	
 	@Autowired
-	MqDataService mqDataService;
+	MqProducerService mqProducerService;
 	
 	
 	@RequestMapping(value="/page",method=RequestMethod.POST)
 	@YcApi
-	public PageResultResponse<Track> queryByPage(@RequestBody ESPageQuery query){
-		return mqDataService.pageQuery(query,query.getIndex());
+	public PageResultResponse<MqProducer> queryByPage(@RequestBody ESPageQuery query){
+		return mqProducerService.pageQuery(query,query.getIndex());
 	}
 	
 	@RequestMapping(value="/list",method=RequestMethod.GET)
 	@YcApi
-	public RestResultResponse<Track> getByList(String queryString,String index){
-		return new RestResultResponse<MqData>().success(true).data(mqDataService.selectList(index, queryString));
-		
+	public RestResultResponse<MqProducer> getByList(String queryString,String index){
+		return new RestResultResponse<MqData>().success(true).data(mqProducerService.selectList(index, queryString));
 	}
 }
