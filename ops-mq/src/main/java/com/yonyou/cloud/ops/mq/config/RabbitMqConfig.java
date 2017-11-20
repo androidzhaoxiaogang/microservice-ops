@@ -5,14 +5,14 @@ import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.BindingBuilder;
 import org.springframework.amqp.core.FanoutExchange;
 import org.springframework.amqp.core.Queue;
-import org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer;
-import org.springframework.context.annotation.Bean;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer;
 import org.springframework.amqp.support.converter.JsonMessageConverter;
 import org.springframework.amqp.support.converter.MessageConverter;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
-import com.yonyou.cloud.ops.mq.service.listen.MqMsgListener;
+import com.yonyou.cloud.ops.mq.service.listener.MqMsgListener;
 
 @Configuration
 public class RabbitMqConfig {
@@ -45,12 +45,15 @@ public class RabbitMqConfig {
 		container.setMaxConcurrentConsumers(10);//设置最大消费者数量 防止大批量涌入
 		return container;
 	}
-
     
-    @Bean
-	public MessageConverter messageConverter() {
-		JsonMessageConverter jsonMessageConverter = new JsonMessageConverter();
-		return jsonMessageConverter;
-	}
+//    @Bean
+//    public DefaultClassMapper typeMapper() {
+//        DefaultClassMapper typeMapper = new DefaultClassMapper();
+//        Map<String, Class<?>> idClassMapping = new HashMap<String, Class<?>>();
+////        idClassMapping.put("range", Track.class);
+//        typeMapper.setIdClassMapping(idClassMapping);
+//        //typeMapper.setDefaultType(Loan.class);
+//        return typeMapper;
+//    }
 	
 }
