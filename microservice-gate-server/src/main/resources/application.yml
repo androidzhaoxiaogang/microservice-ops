@@ -13,8 +13,14 @@ spring:
         host: 10.180.8.220
         pool:
             max-active: 20
+    datasource:
+       driverClassName: com.mysql.jdbc.Driver
+       url: jdbc:mysql://10.180.8.205:3306/ag_gate?useUnicode=true&amp;characterEncoding=utf8mb4
+       username: root
+       password: rcs
 server:
-    port: 8765 #启动端口
+    port: 8766 #启动端口
+
 #
 zuul:
   ignored-services: "*"
@@ -40,7 +46,9 @@ zuul:
     auth:
       path: /auth/**
       serviceId: gate-auth
-
+  store:
+    mysql:
+      enabled: true
 ribbon:
   eureka:
     enabled: true
@@ -69,7 +77,9 @@ gate:
   ignore:
     startWith: /static,/auth/jwt
 
-
+logging:
+  level:
+    root: info
 auth:
   serviceId: gate-auth
   user:

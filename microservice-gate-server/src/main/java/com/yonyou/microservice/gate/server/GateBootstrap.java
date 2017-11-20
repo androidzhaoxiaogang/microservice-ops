@@ -28,6 +28,8 @@ import com.yonyou.microservice.gate.server.utils.DBLog;
 @EnableDiscoveryClient
 @EnableFeignClients({"com.yonyou.microservice.auth.client.feign","com.yonyou.microservice.gate.server.feign"})
 @EnableZuulProxy
+//@EnableZuulProxyStore
+//@ComponentScan(basePackages = {"com.yonyou.cloud.zuul.db","com.yonyou.microservice.gate.server"})
 @EnableScheduling
 @EnableAceAuthClient
 @EnableAceGateRateLimit

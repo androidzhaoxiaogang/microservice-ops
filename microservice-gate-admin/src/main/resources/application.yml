@@ -35,7 +35,7 @@ mybatis:
     xmlLocation: classpath:mapper/**/*.xml
 
 server:
-    port: 8762
+    port: 8760
 
 eureka:
     instance:

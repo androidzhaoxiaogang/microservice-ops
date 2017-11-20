@@ -12,10 +12,10 @@
 	
 	
     <dependencies>
-        <dependency>
+         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-undertow</artifactId>
-        </dependency>
+        </dependency> 
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-zuul</artifactId>
@@ -24,15 +24,21 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
-        <dependency>
+         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-redis</artifactId>
-        </dependency>
+        </dependency> 
 
         <dependency>
             <groupId>com.yonyou.cloud</groupId>
             <artifactId>microservice-gate-common</artifactId>
             <version>0.0.1-SNAPSHOT</version>
+            <exclusions>
+ 			<exclusion>
+			  <groupId>tk.mybatis</groupId>
+			  <artifactId>mapper</artifactId>
+			</exclusion> <!---->
+			</exclusions>
         </dependency>
         <dependency>
             <groupId>org.springframework.cloud</groupId>
@@ -42,12 +48,13 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-eureka</artifactId>
         </dependency> <!---->
-        
-<!-- 			<dependency>
-				<groupId>org.springframework.cloud</groupId>
-				<artifactId>spring-cloud-netflix-core</artifactId>
-				<version>1.3.1.RELEASE</version>
-			</dependency> -->
+    <!--      
+    	<dependency>  
+  		  <groupId>com.yonyou.cloud</groupId>
+  		  <artifactId>microservice-zuul-db-starter</artifactId>
+  		  <version>0.0.1</version>
+		</dependency> 
+		  -->
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
@@ -76,7 +83,7 @@
         </dependency>
     </dependencies>
     <build>
-        <finalName>ace-gate</finalName>
+        <finalName>gate-server</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>

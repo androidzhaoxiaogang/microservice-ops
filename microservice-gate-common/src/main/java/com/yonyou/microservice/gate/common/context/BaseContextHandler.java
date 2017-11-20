@@ -1,17 +1,18 @@
 package com.yonyou.microservice.gate.common.context;
 
-import com.yonyou.microservice.gate.common.constant.CommonConstants;
-import com.yonyou.microservice.gate.common.util.StringHelper;
+import static org.junit.Assert.assertEquals;
+
+import java.util.HashMap;
+import java.util.Map;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import static org.junit.Assert.assertEquals;
+import com.yonyou.microservice.gate.common.constant.CommonConstants;
+import com.yonyou.microservice.gate.common.util.StringHelper;
 
 /**
  * Created by ace on 2017/9/8.
@@ -20,6 +21,7 @@ public class BaseContextHandler {
     public static ThreadLocal<Map<String, Object>> threadLocal = new ThreadLocal<Map<String, Object>>();
 
     public static void set(String key, Object value) {
+    	System.out.println("--threadid:"+Thread.currentThread());
         Map<String, Object> map = threadLocal.get();
         if (map == null) {
             map = new HashMap<String, Object>();
@@ -29,6 +31,7 @@ public class BaseContextHandler {
     }
 
     public static Object get(String key){
+    	System.out.println("--threadid:"+Thread.currentThread());
         Map<String, Object> map = threadLocal.get();
         if (map == null) {
             map = new HashMap<String, Object>();

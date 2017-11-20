@@ -37,7 +37,7 @@ mybatis:
     xmlLocation: classpath:mapper/**/*.xml
 
 server:
-    port: 8777 #启动端口
+    port: 8778 #启动端口
 
 ribbon:
   eureka:

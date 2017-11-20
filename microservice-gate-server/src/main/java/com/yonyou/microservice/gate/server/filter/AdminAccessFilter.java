@@ -9,6 +9,7 @@ import java.util.regex.Pattern;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -45,6 +46,7 @@ import lombok.extern.slf4j.Slf4j;
 @Component
 @Slf4j
 public class AdminAccessFilter extends ZuulFilter {
+	private static Logger logger=Logger.getLogger(AdminAccessFilter.class);
 
     @Autowired
     private IUserService userService;
@@ -67,6 +69,10 @@ public class AdminAccessFilter extends ZuulFilter {
 
     @Autowired
     private ServiceAuthUtil serviceAuthUtil;
+    
+    public AdminAccessFilter(){
+    	logger.info("--AdminAccessFilter对象创建");
+    }
 
     @Override
     public String filterType() {
@@ -85,6 +91,7 @@ public class AdminAccessFilter extends ZuulFilter {
 
     @Override
     public Object run() {
+    	logger.info("--AdminAccessFilter.run(),进入网关");
         RequestContext ctx = RequestContext.getCurrentContext();
         HttpServletRequest request = ctx.getRequest();
         final String requestUri = request.getRequestURI().substring(zuulPrefix.length());
