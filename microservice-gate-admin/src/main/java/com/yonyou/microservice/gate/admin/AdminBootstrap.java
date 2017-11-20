@@ -21,7 +21,7 @@ import com.yonyou.microservice.gate.common.constant.UserConstant;
 @EnableEurekaClient
 @EnableCircuitBreaker
 @SpringBootApplication
-@EnableFeignClients({"com.github.wxiaoqi.security.auth.client.feign"})
+@EnableFeignClients({"com.yonyou.microservice.auth.client.feign"})
 @EnableScheduling
 @EnableAceAuthClient
 @ServletComponentScan("com.yonyou.microservice.gate.admin.config.druid")

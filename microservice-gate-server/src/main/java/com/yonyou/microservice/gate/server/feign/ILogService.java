@@ -12,7 +12,7 @@ import com.yonyou.microservice.gate.common.vo.log.LogInfo;
  * @author joy
  * @create 2017-07-01 15:16
  */
-@FeignClient("ace-admin")
+@FeignClient("back-admin")
 public interface ILogService {
   @RequestMapping(value="/api/log/save",method = RequestMethod.POST)
   public void saveLog(LogInfo info);

@@ -26,7 +26,7 @@ import com.yonyou.microservice.gate.server.utils.DBLog;
  */
 @SpringBootApplication
 @EnableDiscoveryClient
-@EnableFeignClients({"com.github.wxiaoqi.security.auth.client.feign","com.yonyou.microservice.gate.server.feign"})
+@EnableFeignClients({"com.yonyou.microservice.auth.client.feign","com.yonyou.microservice.gate.server.feign"})
 @EnableZuulProxy
 @EnableScheduling
 @EnableAceAuthClient

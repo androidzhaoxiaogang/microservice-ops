@@ -18,7 +18,7 @@ import com.youyou.microservice.auth.server.configuration.FeignConfiguration;
  * @author wanghaobin
  * @create 2017-06-21 8:11
  */
-@FeignClient(value = "ace-admin",configuration = FeignConfiguration.class)
+@FeignClient(value = "back-admin",configuration = FeignConfiguration.class)
 public interface IUserService {
   @RequestMapping(value = "/api/user/username/{username}", method = RequestMethod.GET)
   public UserInfo getUserByUsername(@PathVariable("username") String username);
