@@ -59,7 +59,7 @@
 
         <dependency>
             <groupId>com.yonyou.cloud</groupId>
-            <artifactId>microservice-gate-common</artifactId>
+            <artifactId>ops-common</artifactId>
             <version>0.0.1-SNAPSHOT</version>
             <exclusions>
  			<exclusion>
