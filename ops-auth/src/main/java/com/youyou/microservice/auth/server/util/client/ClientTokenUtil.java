@@ -5,8 +5,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 
-import com.yonyou.microservice.gate.common.util.jwt.IJWTInfo;
-import com.yonyou.microservice.gate.common.util.jwt.JWTHelper;
+import com.yonyou.cloud.common.jwt.IJWTInfo;
+import com.yonyou.cloud.common.jwt.JWTHelper;
 
 /**
  * Created by ace on 2017/9/10.

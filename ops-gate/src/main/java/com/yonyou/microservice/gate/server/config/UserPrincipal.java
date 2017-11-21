@@ -5,9 +5,9 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 
+import com.yonyou.cloud.common.jwt.IJWTInfo;
 import com.yonyou.microservice.auth.client.config.UserAuthConfig;
 import com.yonyou.microservice.auth.client.jwt.UserAuthUtil;
-import com.yonyou.microservice.gate.common.util.jwt.IJWTInfo;
 import com.yonyou.microservice.gate.ratelimit.config.IUserPrincipal;
 
 /**

@@ -10,8 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.yonyou.cloud.common.jwt.JWTInfo;
 import com.yonyou.microservice.gate.common.constant.CommonConstants;
-import com.yonyou.microservice.gate.common.util.jwt.JWTInfo;
 import com.yonyou.microservice.gate.common.vo.authority.PermissionInfo;
 import com.yonyou.microservice.gate.common.vo.user.UserInfo;
 import com.youyou.microservice.auth.server.feign.IUserService;

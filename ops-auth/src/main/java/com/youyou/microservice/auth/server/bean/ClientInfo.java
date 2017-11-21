@@ -1,7 +1,7 @@
 package com.youyou.microservice.auth.server.bean;
 
 
-import com.yonyou.microservice.gate.common.util.jwt.IJWTInfo;
+import com.yonyou.cloud.common.jwt.IJWTInfo;
 
 /**
  * Created by ace on 2017/9/10.
