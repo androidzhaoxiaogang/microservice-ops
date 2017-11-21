@@ -1,6 +1,6 @@
 package com.yonyou.cloud.ops.mq.entity;
 
-public class MqProducer {
+public class MqConsumeDetailInfo {
 	
 	private String host;
 	
@@ -14,10 +14,12 @@ public class MqProducer {
 	
 	private Long occurTime;	
 	
-	private String exchangeName;
+	private String queueName;
 	
-	private String routingKey;
-
+	private String appName;
+	
+	private String consumerId;
+	
 	public String getHost() {
 		return host;
 	}
@@ -66,20 +68,28 @@ public class MqProducer {
 		this.occurTime = occurTime;
 	}
 
-	public String getExchangeName() {
-		return exchangeName;
+	public String getQueueName() {
+		return queueName;
 	}
 
-	public void setExchangeName(String exchangeName) {
-		this.exchangeName = exchangeName;
+	public void setQueueName(String queueName) {
+		this.queueName = queueName;
 	}
 
-	public String getRoutingKey() {
-		return routingKey;
+	public String getAppName() {
+		return appName;
 	}
 
-	public void setRoutingKey(String routingKey) {
-		this.routingKey = routingKey;
+	public void setAppName(String appName) {
+		this.appName = appName;
 	}
-	
+
+	public String getConsumerId() {
+		return consumerId;
+	}
+
+	public void setConsumerId(String consumerId) {
+		this.consumerId = consumerId;
+	}
+
 }
