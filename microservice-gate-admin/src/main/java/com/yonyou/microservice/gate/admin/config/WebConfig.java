@@ -27,6 +27,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
         ArrayList<String> commonPathPatterns = getExcludeCommonPathPatterns();
         registry.addInterceptor(getServiceAuthRestInterceptor()).addPathPatterns("/**").excludePathPatterns(commonPathPatterns.toArray(new String[]{}));
         commonPathPatterns .add("/api/user/username/**");
+        commonPathPatterns .add("/api/user/phone/**");
         registry.addInterceptor(getUserAuthRestInterceptor()).addPathPatterns("/**").excludePathPatterns(commonPathPatterns.toArray(new String[]{}));
         super.addInterceptors(registry);
     }

@@ -50,6 +50,11 @@ public class UserBiz extends BaseBiz<UserMapper,User> {
         user.setUsername(username);
         return mapper.selectOne(user);
     }
+    public User getUserByPhone(String phone){
+        User user = new User();
+        user.setTelPhone(phone);
+        return mapper.selectOne(user);
+    }
 
 
 }

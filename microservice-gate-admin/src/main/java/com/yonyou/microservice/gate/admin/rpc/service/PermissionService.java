@@ -47,6 +47,14 @@ public class PermissionService {
         return info;
     }
 
+    public UserInfo getUserByPhone(String phone) {
+        UserInfo info = new UserInfo();
+        User user = userBiz.getUserByPhone(phone);
+        BeanUtils.copyProperties(user, info);
+        info.setId(user.getId().toString());
+        return info;
+    }
+
     public List<PermissionInfo> getAllPermission() {
         List<Menu> menus = menuBiz.selectListAll();
         List<PermissionInfo> result = new ArrayList<PermissionInfo>();

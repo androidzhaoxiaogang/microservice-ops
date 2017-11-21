@@ -23,6 +23,9 @@ public class AuthController {
     @RequestMapping(value = "token", method = RequestMethod.POST)
     public ResponseEntity<?> createAuthenticationToken(
             @RequestBody JwtAuthenticationRequest authenticationRequest) throws Exception {
+    	if("".equals(authenticationRequest.getPassword())){
+    		return ResponseEntity.ok("password can't be null");
+    	}
         final String token = authService.login(authenticationRequest.getUsername(), authenticationRequest.getPassword());
         return ResponseEntity.ok(new JwtAuthenticationResponse(token));
     }

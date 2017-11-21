@@ -46,6 +46,13 @@ zuul:
     auth:
       path: /auth/**
       serviceId: gate-auth
+    captcha:
+      path: /captcha/**
+      serviceId: gate-auth
+      strip-prefix: false
+    wechat:
+      path: /wechat/**
+      serviceId: gate-wechat
   store:
     mysql:
       enabled: true
@@ -75,7 +82,7 @@ hystrix:
 
 gate:
   ignore:
-    startWith: /static,/auth/jwt
+    startWith: /static,/auth/jwt,/captcha/jwt
 
 logging:
   level:

@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -20,6 +21,7 @@ import com.youyou.microservice.auth.server.vo.FrontUser;
 
 @Service
 public class AuthServiceImpl implements AuthService {
+	private static Logger logger=Logger.getLogger(AuthServiceImpl.class);
 
     private JwtTokenUtil jwtTokenUtil;
     private IUserService userService;
@@ -38,6 +40,15 @@ public class AuthServiceImpl implements AuthService {
         UserInfo info = userService.getUserByUsername(username);
         String token = "";
         if (encoder.matches(password, info.getPassword())) {
+            token = jwtTokenUtil.generateToken(new JWTInfo(info.getUsername(), info.getId() + "", info.getName()));
+        }
+        return token;
+    }
+    public String loginPhone(String phone, String captcha) throws Exception{
+    	logger.info("--AuthServiceImpl,phone="+phone+",captcha="+captcha);
+        UserInfo info = userService.getUserByPhone(phone);
+        String token = "";
+        if (info!=null&& captcha.equals("8888")) {
             token = jwtTokenUtil.generateToken(new JWTInfo(info.getUsername(), info.getId() + "", info.getName()));
         }
         return token;
