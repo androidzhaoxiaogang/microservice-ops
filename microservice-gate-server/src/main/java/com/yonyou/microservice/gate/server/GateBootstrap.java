@@ -6,14 +6,15 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.netflix.feign.EnableFeignClients;
-import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Primary;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.yonyou.cloud.zuul.db.api.EnableZuulProxyStore;
 import com.yonyou.microservice.auth.client.EnableAceAuthClient;
 import com.yonyou.microservice.gate.ratelimit.EnableAceGateRateLimit;
 import com.yonyou.microservice.gate.ratelimit.config.IUserPrincipal;
@@ -27,9 +28,9 @@ import com.yonyou.microservice.gate.server.utils.DBLog;
 @SpringBootApplication
 @EnableDiscoveryClient
 @EnableFeignClients({"com.yonyou.microservice.auth.client.feign","com.yonyou.microservice.gate.server.feign"})
-@EnableZuulProxy
-//@EnableZuulProxyStore
-//@ComponentScan(basePackages = {"com.yonyou.cloud.zuul.db","com.yonyou.microservice.gate.server"})
+//@EnableZuulProxy
+@EnableZuulProxyStore
+@ComponentScan(basePackages = {"com.yonyou.cloud.zuul.db","com.yonyou.microservice.gate.server"})
 @EnableScheduling
 @EnableAceAuthClient
 @EnableAceGateRateLimit

@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.yonyou.microservice.auth.client.annotation.IgnoreUserToken;
 import com.yonyou.microservice.gate.admin.biz.GateLogBiz;
 import com.yonyou.microservice.gate.admin.entity.GateLog;
 import com.yonyou.microservice.gate.common.vo.log.LogInfo;
@@ -20,6 +21,7 @@ import com.yonyou.microservice.gate.common.vo.log.LogInfo;
  */
 @RequestMapping("api")
 @RestController
+@IgnoreUserToken
 public class LogRest {
     @Autowired
     private GateLogBiz gateLogBiz;

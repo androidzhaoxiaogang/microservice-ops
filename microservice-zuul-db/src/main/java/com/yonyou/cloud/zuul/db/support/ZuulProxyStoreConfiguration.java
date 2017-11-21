@@ -48,7 +48,7 @@ public class ZuulProxyStoreConfiguration extends ZuulProxyConfiguration {
     private ServerProperties server;
 
     @Override
-    public DiscoveryClientRouteLocator routeLocator() {
+    public DiscoveryClientRouteLocator discoveryRouteLocator() {
     	logger.info("--ZuulProxyStoreConfiguration.routeLocator");
         return new StoreProxyRouteLocator(server.getServletPath(),discovery, zuulProperties, zuulRouteStore);
     }
