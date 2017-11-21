@@ -8,6 +8,7 @@ public class JwtAuthenticationRequest implements Serializable {
 
     private String username;
     private String password;
+    private String captcha;
 
 
     public JwtAuthenticationRequest(String username, String password) {
@@ -33,4 +34,13 @@ public class JwtAuthenticationRequest implements Serializable {
     public void setUsername(String username) {
         this.username = username;
     }
+
+	public String getCaptcha() {
+		return captcha;
+	}
+
+	public void setCaptcha(String captcha) {
+		this.captcha = captcha;
+	}
+    
 }

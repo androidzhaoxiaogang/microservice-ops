@@ -30,6 +30,12 @@ public class UserRest {
         return permissionService.getUserByUsername(username);
     }
 
+
+    @RequestMapping(value = "/user/phone/{phone}",method = RequestMethod.GET, produces="application/json")
+    public  @ResponseBody UserInfo getUserByPhone(@PathVariable("phone")String phone) {
+        return permissionService.getUserByPhone(phone);
+    }
+    
     @RequestMapping(value = "/permissions", method = RequestMethod.GET)
     public @ResponseBody List<PermissionInfo> getAllPermission(){
         return permissionService.getAllPermission();

@@ -15,6 +15,7 @@ public class UserInfo implements Serializable{
     public String password;
     public String name;
     private String description;
+    private String telPhone;
 
     public Date getUpdTime() {
         return updTime;
@@ -65,4 +66,13 @@ public class UserInfo implements Serializable{
     public void setDescription(String description) {
         this.description = description;
     }
+
+	public String getTelPhone() {
+		return telPhone;
+	}
+
+	public void setTelPhone(String telPhone) {
+		this.telPhone = telPhone;
+	}
+    
 }

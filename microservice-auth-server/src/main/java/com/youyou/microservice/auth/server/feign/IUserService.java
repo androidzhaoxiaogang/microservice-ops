@@ -22,6 +22,8 @@ import com.youyou.microservice.auth.server.configuration.FeignConfiguration;
 public interface IUserService {
   @RequestMapping(value = "/api/user/username/{username}", method = RequestMethod.GET)
   public UserInfo getUserByUsername(@PathVariable("username") String username);
+  @RequestMapping(value = "/api/user/phone/{phone}", method = RequestMethod.GET)
+  public UserInfo getUserByPhone(@PathVariable("phone") String phone);
   @RequestMapping(value = "/api/user/un/{username}/permissions", method = RequestMethod.GET)
   public List<PermissionInfo> getPermissionByUsername(@PathVariable("username") String username);
   @RequestMapping(value = "/api/permissions", method = RequestMethod.GET)
