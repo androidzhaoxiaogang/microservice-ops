@@ -15,7 +15,7 @@ spring:
             max-active: 20
     datasource:
        driverClassName: com.mysql.jdbc.Driver
-       url: jdbc:mysql://10.180.8.205:3306/ag_gate?useUnicode=true&amp;characterEncoding=utf8mb4
+       url: jdbc:mysql://10.180.8.205:3306/ag_admin?useUnicode=true&amp;characterEncoding=utf8mb4
        username: root
        password: rcs
 server:
