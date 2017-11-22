@@ -1,21 +1,23 @@
 package com.yonyou.microservice.gate.admin.entity;
 
+import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Table(name = "gate_routes")
 public class Route {
-	private String id;          
+    @Id
+	private Integer id;          
 	private String path;          
 	private String serviceId;          
 	private String url;          
-	private Boolean stripPrefix;          
-	private Boolean retryable;
+	private String stripPrefix;          
+	private String retryable;
 
-	public String getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -43,19 +45,19 @@ public class Route {
 		this.url = url;
 	}
 
-	public boolean getStripPrefix() {
+	public String getStripPrefix() {
 		return stripPrefix;
 	}
 
-	public void setStripPrefix(boolean stripPrefix) {
+	public void setStripPrefix(String stripPrefix) {
 		this.stripPrefix = stripPrefix;
 	}
 
-	public Boolean getRetryable() {
+	public String getRetryable() {
 		return retryable;
 	}
 
-	public void setRetryable(Boolean retryable) {
+	public void setRetryable(String retryable) {
 		this.retryable = retryable;
 	}
 
