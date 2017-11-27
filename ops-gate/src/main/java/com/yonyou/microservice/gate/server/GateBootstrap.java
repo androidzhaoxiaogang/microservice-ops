@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.yonyou.cloud.zuul.db.api.EnableZuulProxyStore;
 import com.yonyou.microservice.auth.client.EnableAceAuthClient;
+import com.yonyou.microservice.filter.annotation.EnableGroovyFilter;
 import com.yonyou.microservice.gate.ratelimit.EnableAceGateRateLimit;
 import com.yonyou.microservice.gate.ratelimit.config.IUserPrincipal;
 import com.yonyou.microservice.gate.ratelimit.config.properties.RateLimitProperties;
@@ -28,13 +29,13 @@ import com.yonyou.microservice.gate.server.utils.DBLog;
 @SpringBootApplication
 @EnableDiscoveryClient
 @EnableFeignClients({"com.yonyou.microservice.auth.client.feign","com.yonyou.microservice.gate.server.feign"})
-//@EnableZuulProxy
 @EnableZuulProxyStore
 @ComponentScan(basePackages = {"com.yonyou.cloud.zuul.db","com.yonyou.microservice.gate.server"})
 @EnableScheduling
 @EnableAceAuthClient
 @EnableAceGateRateLimit
 @RestController
+@EnableGroovyFilter
 public class GateBootstrap {
 	@Autowired
 	private RateLimitProperties p;

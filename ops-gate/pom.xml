@@ -44,10 +44,21 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-undertow</artifactId>
         </dependency> 
+
+        <dependency>
+            <groupId>com.yonyou.cloud</groupId>
+            <artifactId>ops-common</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-zuul</artifactId>
         </dependency>
+         <dependency>
+		  <groupId>com.yonyou.cloud</groupId>
+  		  <artifactId>microservice-filter-starter</artifactId>
+  		  <version>0.0.1-SNAPSHOT</version>
+        </dependency><!--  -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
@@ -57,17 +68,6 @@
             <artifactId>spring-boot-starter-data-redis</artifactId>
         </dependency> 
 
-        <dependency>
-            <groupId>com.yonyou.cloud</groupId>
-            <artifactId>ops-common</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-            <exclusions>
- 			<exclusion>
-			  <groupId>tk.mybatis</groupId>
-			  <artifactId>mapper</artifactId>
-			</exclusion> <!---->
-			</exclusions>
-        </dependency>
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-feign</artifactId>
