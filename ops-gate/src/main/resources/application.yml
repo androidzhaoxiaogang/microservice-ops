@@ -112,12 +112,12 @@ auth:
 groovy:
   filter:
     path: D:\\Del\\groovy\\
+    interval: 600
   db:
     name: test
     url: jdbc:mysql://10.180.8.205:3306/ag_gate?useUnicode=true&characterEncoding=UTF8
     username: root
     password: rcs
-    # 使用druid数据源
     type: com.alibaba.druid.pool.DruidDataSource
     driver-class-name: com.mysql.jdbc.Driver
     basepackage: com.yonyou.microservice.filter.mapper

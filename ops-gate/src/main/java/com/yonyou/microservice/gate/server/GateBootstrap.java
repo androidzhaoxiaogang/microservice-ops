@@ -1,6 +1,8 @@
 package com.yonyou.microservice.gate.server;
 
 
+import java.text.ParseException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -43,7 +45,15 @@ public class GateBootstrap {
     public String test(){
     	return "ok";
     }
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ParseException {
+//    	DateFormat df = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+//    	Date date1=df.parse("2017-11-27 15:35:28");
+//    	Date date2=df.parse("2017-11-27 15:35:29");
+//    	long l1=date1.getTime();
+//    	long l2=date2.getTime();
+//    	if(l1<l2){
+//    		System.out.println("--------");
+//    	}
         DBLog.getInstance().start();
         SpringApplication.run(GateBootstrap.class, args);
     }
