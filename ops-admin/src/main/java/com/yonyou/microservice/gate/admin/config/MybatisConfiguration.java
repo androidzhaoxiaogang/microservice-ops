@@ -3,6 +3,8 @@ package com.yonyou.microservice.gate.admin.config;
 
 import com.alibaba.druid.pool.DruidDataSource;
 import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInterceptor;
+
 import org.apache.commons.lang3.StringUtils;
 import org.apache.ibatis.plugin.Interceptor;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -96,7 +98,7 @@ public class MybatisConfiguration implements EnvironmentAware {
             bean.setTypeAliasesPackage(typeAliasesPackage);
         }
         //分页插件
-        PageHelper pageHelper = new PageHelper();
+        PageInterceptor pageHelper = new PageInterceptor();
         Properties properties = new Properties();
         properties.setProperty("reasonable", "true");
         properties.setProperty("supportMethodsArguments", "true");
@@ -106,6 +108,7 @@ public class MybatisConfiguration implements EnvironmentAware {
         //添加XML目录
         ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
         Interceptor[] plugins =  new Interceptor[]{pageHelper};
+        
         bean.setPlugins(plugins);
         try {
             bean.setMapperLocations(resolver.getResources(xmlLocation));

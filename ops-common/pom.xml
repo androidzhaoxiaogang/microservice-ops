@@ -96,6 +96,20 @@
 	        <version>0.0.1-SNAPSHOT</version>
         </dependency>
     </dependencies>
+    
+    <distributionManagement>
+		<repository>
+			<id>nexus-releases</id>
+			<name>Releases name</name>
+			<url>http://210.13.111.26:10160/nexus/content/repositories/releases/</url>
+		</repository>
+		<snapshotRepository>
+			<id>nexus-snapshots</id>
+			<name>snapshots name</name>
+			<url>http://210.13.111.26:10160/nexus/content/repositories/snapshots/</url>
+		</snapshotRepository>
+	</distributionManagement>
+    
     <build>
         <plugins>
             <plugin>
