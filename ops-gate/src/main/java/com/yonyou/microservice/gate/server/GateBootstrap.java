@@ -1,6 +1,8 @@
 package com.yonyou.microservice.gate.server;
 
 
+import java.text.ParseException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.yonyou.cloud.zuul.db.api.EnableZuulProxyStore;
 import com.yonyou.microservice.auth.client.EnableAceAuthClient;
+import com.yonyou.microservice.filter.annotation.EnableGroovyFilter;
 import com.yonyou.microservice.gate.ratelimit.EnableAceGateRateLimit;
 import com.yonyou.microservice.gate.ratelimit.config.IUserPrincipal;
 import com.yonyou.microservice.gate.ratelimit.config.properties.RateLimitProperties;
@@ -28,13 +31,13 @@ import com.yonyou.microservice.gate.server.utils.DBLog;
 @SpringBootApplication
 @EnableDiscoveryClient
 @EnableFeignClients({"com.yonyou.microservice.auth.client.feign","com.yonyou.microservice.gate.server.feign"})
-//@EnableZuulProxy
 @EnableZuulProxyStore
 @ComponentScan(basePackages = {"com.yonyou.cloud.zuul.db","com.yonyou.microservice.gate.server"})
 @EnableScheduling
 @EnableAceAuthClient
 @EnableAceGateRateLimit
 @RestController
+@EnableGroovyFilter
 public class GateBootstrap {
 	@Autowired
 	private RateLimitProperties p;
@@ -42,7 +45,15 @@ public class GateBootstrap {
     public String test(){
     	return "ok";
     }
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ParseException {
+//    	DateFormat df = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+//    	Date date1=df.parse("2017-11-27 15:35:28");
+//    	Date date2=df.parse("2017-11-27 15:35:29");
+//    	long l1=date1.getTime();
+//    	long l2=date2.getTime();
+//    	if(l1<l2){
+//    		System.out.println("--------");
+//    	}
         DBLog.getInstance().start();
         SpringApplication.run(GateBootstrap.class, args);
     }
