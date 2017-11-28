@@ -23,12 +23,13 @@ import com.yonyou.microservice.gate.common.vo.log.LogInfo;
 @RestController
 @IgnoreUserToken
 public class LogRest {
-    @Autowired
-    private GateLogBiz gateLogBiz;
-    @RequestMapping(value="/log/save",method = RequestMethod.POST)
-    public @ResponseBody void saveLog(@RequestBody LogInfo info){
-        GateLog log = new GateLog();
-        BeanUtils.copyProperties(info,log);
-        gateLogBiz.insertSelective(log);
-    }
+	@Autowired
+	private GateLogBiz gateLogBiz;
+
+	@RequestMapping(value = "/log/save", method = RequestMethod.POST)
+	public @ResponseBody void saveLog(@RequestBody LogInfo info) {
+		GateLog log = new GateLog();
+		BeanUtils.copyProperties(info, log);
+		gateLogBiz.insertSelective(log);
+	}
 }
