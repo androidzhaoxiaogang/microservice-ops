@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 
+import com.yonyou.cloud.common.beans.RestResultResponse;
 import com.yonyou.cloud.common.jwt.IJWTInfo;
 import com.yonyou.cloud.common.jwt.JWTHelper;
 import com.yonyou.microservice.auth.client.config.ServiceAuthConfig;
@@ -15,8 +16,6 @@ import com.yonyou.microservice.auth.client.exception.JwtIllegalArgumentException
 import com.yonyou.microservice.auth.client.exception.JwtSignatureException;
 import com.yonyou.microservice.auth.client.exception.JwtTokenExpiredException;
 import com.yonyou.microservice.auth.client.feign.ServiceAuthFeign;
-import com.yonyou.microservice.gate.common.msg.BaseResponse;
-import com.yonyou.microservice.gate.common.msg.ObjectRestResponse;
 
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.SignatureException;
@@ -52,9 +51,9 @@ public class ServiceAuthUtil {
     @Scheduled(cron = "0 0/5 * * * ?")
     public void refreshAllowedClient() {
         log.info("refresh allowedClient.....");
-        BaseResponse resp = serviceAuthFeign.getAllowedClient(serviceAuthConfig.getClientId(), serviceAuthConfig.getClientSecret());
-        if (resp.getStatus() == 200) {
-            ObjectRestResponse<List<String>> allowedClient = (ObjectRestResponse<List<String>>) resp;
+        RestResultResponse resp = serviceAuthFeign.getAllowedClient(serviceAuthConfig.getClientId(), serviceAuthConfig.getClientSecret());
+        if (resp.getResultCode() == 200) {
+        	RestResultResponse<List<String>> allowedClient = (RestResultResponse<List<String>>) resp;
             this.allowedClient = allowedClient.getData();
         }
     }
@@ -63,9 +62,9 @@ public class ServiceAuthUtil {
     @Scheduled(cron = "0 0 0/1 * * ?")
     public void refreshClientToken() {
         log.info("refresh client token.....");
-        BaseResponse resp = serviceAuthFeign.getAccessToken(serviceAuthConfig.getClientId(), serviceAuthConfig.getClientSecret());
-        if (resp.getStatus() == 200) {
-            ObjectRestResponse<String> clientToken = (ObjectRestResponse<String>) resp;
+        RestResultResponse resp = serviceAuthFeign.getAccessToken(serviceAuthConfig.getClientId(), serviceAuthConfig.getClientSecret());
+        if (resp.getResultCode() == 200) {
+        	RestResultResponse<String> clientToken = (RestResultResponse<String>) resp;
             this.clientToken = clientToken.getData();
         }
     }

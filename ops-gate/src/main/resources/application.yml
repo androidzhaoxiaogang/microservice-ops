@@ -112,7 +112,7 @@ auth:
 groovy:
   filter:
     path: D:\\Del\\groovy\\
-    interval: 600
+    interval: 60
   db:
     name: test
     url: jdbc:mysql://10.180.8.205:3306/ag_admin?useUnicode=true&characterEncoding=UTF8

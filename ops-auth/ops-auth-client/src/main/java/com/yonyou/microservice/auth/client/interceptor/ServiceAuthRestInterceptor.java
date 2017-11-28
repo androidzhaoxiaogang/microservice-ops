@@ -15,7 +15,7 @@ import com.yonyou.cloud.common.jwt.IJWTInfo;
 import com.yonyou.microservice.auth.client.annotation.IgnoreClientToken;
 import com.yonyou.microservice.auth.client.config.ServiceAuthConfig;
 import com.yonyou.microservice.auth.client.jwt.ServiceAuthUtil;
-import com.yonyou.microservice.gate.common.exception.auth.ClientForbiddenException;
+import com.yonyou.microservice.gate.common.exception.GateException;
 
 /**
  * Created by ace on 2017/9/12.
@@ -52,6 +52,6 @@ public class ServiceAuthRestInterceptor extends HandlerInterceptorAdapter {
                 return super.preHandle(request, response, handler);
             }
         }
-        throw new ClientForbiddenException("Client is Forbidden!");
+        throw GateException.CLIENT_FORBIDDEN_EXCEPTION;
     }
 }

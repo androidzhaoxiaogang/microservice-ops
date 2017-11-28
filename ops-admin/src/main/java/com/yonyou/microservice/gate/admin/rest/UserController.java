@@ -9,12 +9,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.yonyou.cloud.common.controller.BaseController;
 import com.yonyou.microservice.gate.admin.biz.UserBiz;
 import com.yonyou.microservice.gate.admin.entity.User;
 import com.yonyou.microservice.gate.admin.rpc.service.PermissionService;
 import com.yonyou.microservice.gate.admin.vo.FrontUser;
 import com.yonyou.microservice.gate.admin.vo.MenuTree;
-import com.yonyou.microservice.gate.common.rest.BaseController;
 
 /**
  * ${DESCRIPTION}

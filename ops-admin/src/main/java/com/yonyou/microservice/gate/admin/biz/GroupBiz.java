@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import com.yonyou.cloud.common.service.BaseService;
 import com.yonyou.microservice.gate.admin.constant.AdminCommonConstant;
 import com.yonyou.microservice.gate.admin.entity.Group;
 import com.yonyou.microservice.gate.admin.entity.Menu;
@@ -23,7 +24,6 @@ import com.yonyou.microservice.gate.admin.mapper.ResourceAuthorityMapper;
 import com.yonyou.microservice.gate.admin.mapper.UserMapper;
 import com.yonyou.microservice.gate.admin.vo.AuthorityMenuTree;
 import com.yonyou.microservice.gate.admin.vo.GroupUsers;
-import com.yonyou.microservice.gate.common.biz.BaseBiz;
 
 /**
  * ${DESCRIPTION}
@@ -32,7 +32,7 @@ import com.yonyou.microservice.gate.common.biz.BaseBiz;
  * @create 2017-06-12 8:48
  */
 @Service
-public class GroupBiz extends BaseBiz<GroupMapper,Group>{
+public class GroupBiz extends BaseService<GroupMapper,Group>{
     @Autowired
     private UserMapper userMapper;
     @Autowired

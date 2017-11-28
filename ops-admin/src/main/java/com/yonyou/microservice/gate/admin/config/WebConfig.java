@@ -8,9 +8,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
+import com.yonyou.cloud.common.exception.GlobalExceptionHandler;
 import com.yonyou.microservice.auth.client.interceptor.ServiceAuthRestInterceptor;
 import com.yonyou.microservice.auth.client.interceptor.UserAuthRestInterceptor;
-import com.yonyou.microservice.gate.common.handler.GlobalExceptionHandler;
 
 /**
  * Created by ace on 2017/9/8.

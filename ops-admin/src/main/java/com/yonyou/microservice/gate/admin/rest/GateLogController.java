@@ -3,9 +3,9 @@ package com.yonyou.microservice.gate.admin.rest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.yonyou.cloud.common.controller.BaseController;
 import com.yonyou.microservice.gate.admin.biz.GateLogBiz;
 import com.yonyou.microservice.gate.admin.entity.GateLog;
-import com.yonyou.microservice.gate.common.rest.BaseController;
 
 /**
  * ${DESCRIPTION}

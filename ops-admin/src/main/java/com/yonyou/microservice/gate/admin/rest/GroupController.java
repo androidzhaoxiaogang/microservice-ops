@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.yonyou.cloud.common.beans.RestResultResponse;
+import com.yonyou.cloud.common.controller.BaseController;
 import com.yonyou.microservice.gate.admin.biz.GroupBiz;
 import com.yonyou.microservice.gate.admin.biz.ResourceAuthorityBiz;
 import com.yonyou.microservice.gate.admin.constant.AdminCommonConstant;
@@ -19,8 +21,6 @@ import com.yonyou.microservice.gate.admin.entity.Group;
 import com.yonyou.microservice.gate.admin.vo.AuthorityMenuTree;
 import com.yonyou.microservice.gate.admin.vo.GroupTree;
 import com.yonyou.microservice.gate.admin.vo.GroupUsers;
-import com.yonyou.microservice.gate.common.msg.ObjectRestResponse;
-import com.yonyou.microservice.gate.common.rest.BaseController;
 import com.yonyou.microservice.gate.common.util.TreeUtil;
 
 import io.swagger.annotations.Api;
@@ -53,56 +53,56 @@ public class GroupController extends BaseController<GroupBiz, Group> {
             example.createCriteria().andEqualTo("groupType", groupType);
         }
 
-        return baseBiz.selectByExample(example);
+        return baseService.selectByExample(example);
     }
 
 
 
     @RequestMapping(value = "/{id}/user", method = RequestMethod.PUT)
     @ResponseBody
-    public ObjectRestResponse modifiyUsers(@PathVariable int id,String members,String leaders){
-        baseBiz.modifyGroupUsers(id, members, leaders);
-        return new ObjectRestResponse().rel(true);
+    public RestResultResponse modifiyUsers(@PathVariable int id,String members,String leaders){
+        baseService.modifyGroupUsers(id, members, leaders);
+        return new RestResultResponse().success(true);
     }
 
     @RequestMapping(value = "/{id}/user", method = RequestMethod.GET)
     @ResponseBody
-    public ObjectRestResponse<GroupUsers> getUsers(@PathVariable int id){
-        return new ObjectRestResponse<GroupUsers>().rel(true).data(baseBiz.getGroupUsers(id));
+    public RestResultResponse<GroupUsers> getUsers(@PathVariable int id){
+        return new RestResultResponse<GroupUsers>().success(true).data(baseService.getGroupUsers(id));
     }
 
     @RequestMapping(value = "/{id}/authority/menu", method = RequestMethod.POST)
     @ResponseBody
-    public ObjectRestResponse modifyMenuAuthority(@PathVariable  int id, String menuTrees){
+    public RestResultResponse modifyMenuAuthority(@PathVariable  int id, String menuTrees){
         String [] menus = menuTrees.split(",");
-        baseBiz.modifyAuthorityMenu(id, menus);
-        return new ObjectRestResponse().rel(true);
+        baseService.modifyAuthorityMenu(id, menus);
+        return new RestResultResponse().success(true);
     }
 
     @RequestMapping(value = "/{id}/authority/menu", method = RequestMethod.GET)
     @ResponseBody
-    public ObjectRestResponse<List<AuthorityMenuTree>> getMenuAuthority(@PathVariable  int id){
-        return new ObjectRestResponse().data(baseBiz.getAuthorityMenu(id)).rel(true);
+    public RestResultResponse<List<AuthorityMenuTree>> getMenuAuthority(@PathVariable  int id){
+        return new RestResultResponse().data(baseService.getAuthorityMenu(id)).success(true);
     }
 
     @RequestMapping(value = "/{id}/authority/element/add", method = RequestMethod.POST)
     @ResponseBody
-    public ObjectRestResponse addElementAuthority(@PathVariable  int id,int menuId, int elementId){
-        baseBiz.modifyAuthorityElement(id,menuId,elementId);
-        return new ObjectRestResponse().rel(true);
+    public RestResultResponse addElementAuthority(@PathVariable  int id,int menuId, int elementId){
+        baseService.modifyAuthorityElement(id,menuId,elementId);
+        return new RestResultResponse().success(true);
     }
 
     @RequestMapping(value = "/{id}/authority/element/remove", method = RequestMethod.POST)
     @ResponseBody
-    public ObjectRestResponse removeElementAuthority(@PathVariable int id,int menuId, int elementId){
-        baseBiz.removeAuthorityElement(id,menuId,elementId);
-        return new ObjectRestResponse().rel(true);
+    public RestResultResponse removeElementAuthority(@PathVariable int id,int menuId, int elementId){
+        baseService.removeAuthorityElement(id,menuId,elementId);
+        return new RestResultResponse().success(true);
     }
 
     @RequestMapping(value = "/{id}/authority/element", method = RequestMethod.GET)
     @ResponseBody
-    public ObjectRestResponse<List<Integer>> getElementAuthority(@PathVariable  int id){
-        return new ObjectRestResponse().data(baseBiz.getAuthorityElement(id)).rel(true);
+    public RestResultResponse<List<Integer>> getElementAuthority(@PathVariable  int id){
+        return new RestResultResponse().data(baseService.getAuthorityElement(id)).success(true);
     }
 
 
@@ -119,7 +119,7 @@ public class GroupController extends BaseController<GroupBiz, Group> {
         if (StringUtils.isNotBlank(groupType)) {
             example.createCriteria().andEqualTo("groupType", groupType);
         }
-        return  getTree(baseBiz.selectByExample(example), AdminCommonConstant.ROOT);
+        return  getTree(baseService.selectByExample(example), AdminCommonConstant.ROOT);
     }
 
 

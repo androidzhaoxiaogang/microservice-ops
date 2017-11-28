@@ -11,13 +11,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.yonyou.cloud.common.controller.BaseController;
 import com.yonyou.microservice.gate.admin.biz.MenuBiz;
 import com.yonyou.microservice.gate.admin.biz.UserBiz;
 import com.yonyou.microservice.gate.admin.constant.AdminCommonConstant;
 import com.yonyou.microservice.gate.admin.entity.Menu;
 import com.yonyou.microservice.gate.admin.vo.AuthorityMenuTree;
 import com.yonyou.microservice.gate.admin.vo.MenuTree;
-import com.yonyou.microservice.gate.common.rest.BaseController;
 import com.yonyou.microservice.gate.common.util.TreeUtil;
 
 import tk.mybatis.mapper.entity.Example;
@@ -41,7 +41,7 @@ public class MenuController extends BaseController<MenuBiz, Menu> {
         if (StringUtils.isNotBlank(title)) {
             example.createCriteria().andLike("title", "%" + title + "%");
         }
-        return baseBiz.selectByExample(example);
+        return baseService.selectByExample(example);
     }
 
     @RequestMapping(value = "/tree", method = RequestMethod.GET)
@@ -51,7 +51,7 @@ public class MenuController extends BaseController<MenuBiz, Menu> {
         if (StringUtils.isNotBlank(title)) {
             example.createCriteria().andLike("title", "%" + title + "%");
         }
-        return getMenuTree(baseBiz.selectByExample(example), AdminCommonConstant.ROOT);
+        return getMenuTree(baseService.selectByExample(example), AdminCommonConstant.ROOT);
     }
 
 
@@ -61,7 +61,7 @@ public class MenuController extends BaseController<MenuBiz, Menu> {
     public List<Menu> getSystem() {
         Menu menu = new Menu();
         menu.setParentId(AdminCommonConstant.ROOT);
-        return baseBiz.selectList(menu);
+        return baseService.selectList(menu);
     }
 
     @RequestMapping(value = "/menuTree", method = RequestMethod.GET)
@@ -77,9 +77,9 @@ public class MenuController extends BaseController<MenuBiz, Menu> {
         List<MenuTree> trees = new ArrayList<MenuTree>();
         MenuTree node = null;
         Example example = new Example(Menu.class);
-        Menu parent = baseBiz.selectById(parentId);
+        Menu parent = baseService.selectById(parentId);
         example.createCriteria().andLike("path", parent.getPath() + "%").andNotEqualTo("id",parent.getId());
-        return getMenuTree(baseBiz.selectByExample(example), parent.getId());
+        return getMenuTree(baseService.selectByExample(example), parent.getId());
     }
 
     @RequestMapping(value = "/authorityTree", method = RequestMethod.GET)
@@ -87,7 +87,7 @@ public class MenuController extends BaseController<MenuBiz, Menu> {
     public List<AuthorityMenuTree> listAuthorityMenu() {
         List<AuthorityMenuTree> trees = new ArrayList<AuthorityMenuTree>();
         AuthorityMenuTree node = null;
-        for (Menu menu : baseBiz.selectListAll()) {
+        for (Menu menu : baseService.selectListAll()) {
             node = new AuthorityMenuTree();
             node.setText(menu.getTitle());
             BeanUtils.copyProperties(menu, node);
@@ -107,14 +107,14 @@ public class MenuController extends BaseController<MenuBiz, Menu> {
         } catch (Exception e) {
             return new ArrayList<MenuTree>();
         }
-        return getMenuTree(baseBiz.getUserAuthorityMenuByUserId(userId),parentId);
+        return getMenuTree(baseService.getUserAuthorityMenuByUserId(userId),parentId);
     }
 
     @RequestMapping(value = "/user/system", method = RequestMethod.GET)
     @ResponseBody
     public List<Menu> listUserAuthoritySystem() {
         int userId = userBiz.getUserByUsername(getCurrentUserName()).getId();
-        return baseBiz.getUserAuthoritySystemByUserId(userId);
+        return baseService.getUserAuthoritySystemByUserId(userId);
     }
 
     private List<MenuTree> getMenuTree(List<Menu> menus,int root) {

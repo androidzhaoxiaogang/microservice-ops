@@ -4,11 +4,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.yonyou.cloud.common.service.BaseService;
 import com.yonyou.microservice.auth.client.jwt.UserAuthUtil;
 import com.yonyou.microservice.gate.admin.entity.User;
 import com.yonyou.microservice.gate.admin.mapper.MenuMapper;
 import com.yonyou.microservice.gate.admin.mapper.UserMapper;
-import com.yonyou.microservice.gate.common.biz.BaseBiz;
 import com.yonyou.microservice.gate.common.constant.UserConstant;
 
 /**
@@ -18,7 +18,7 @@ import com.yonyou.microservice.gate.common.constant.UserConstant;
  * @create 2017-06-08 16:23
  */
 @Service
-public class UserBiz extends BaseBiz<UserMapper,User> {
+public class UserBiz extends BaseService<UserMapper,User> {
 
     @Autowired
     private MenuMapper menuMapper;

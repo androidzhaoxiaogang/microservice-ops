@@ -4,10 +4,10 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.yonyou.cloud.common.service.BaseService;
 import com.yonyou.microservice.gate.admin.constant.AdminCommonConstant;
 import com.yonyou.microservice.gate.admin.entity.Menu;
 import com.yonyou.microservice.gate.admin.mapper.MenuMapper;
-import com.yonyou.microservice.gate.common.biz.BaseBiz;
 
 /**
  * ${DESCRIPTION}
@@ -16,7 +16,7 @@ import com.yonyou.microservice.gate.common.biz.BaseBiz;
  * @create 2017-06-12 8:48
  */
 @Service
-public class MenuBiz extends BaseBiz<MenuMapper,Menu> {
+public class MenuBiz extends BaseService<MenuMapper,Menu> {
     @Override
     public void insertSelective(Menu entity) {
         if(AdminCommonConstant.ROOT == entity.getParentId()){
