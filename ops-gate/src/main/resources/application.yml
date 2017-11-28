@@ -1,6 +1,6 @@
 spring:
     application:
-        name: gate-server
+        name: gate-service
     thymeleaf:
         mode: LEGACYHTML5
         cache: false
@@ -115,7 +115,7 @@ groovy:
     interval: 600
   db:
     name: test
-    url: jdbc:mysql://10.180.8.205:3306/ag_gate?useUnicode=true&characterEncoding=UTF8
+    url: jdbc:mysql://10.180.8.205:3306/ag_admin?useUnicode=true&characterEncoding=UTF8
     username: root
     password: rcs
     type: com.alibaba.druid.pool.DruidDataSource

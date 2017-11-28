@@ -96,6 +96,19 @@
 			<version>${pagehelpStarter.version}</version>
 		</dependency>
 		
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+		
+		<!--通过starter简化配置-->
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>druid-spring-boot-starter</artifactId>
+			<version>1.1.4</version>
+		</dependency>
+		
 		<!-- druid 
 		<dependency>
 			<groupId>com.alibaba</groupId>
