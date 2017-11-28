@@ -24,23 +24,23 @@ import com.yonyou.microservice.gate.common.rest.BaseController;
  */
 @RestController
 @RequestMapping("user")
-public class UserController extends BaseController<UserBiz,User> {
-    @Autowired
-    private PermissionService permissionService;
-    @RequestMapping(value = "/front/info", method = RequestMethod.GET)
-    @ResponseBody
-    public ResponseEntity<?> getUserInfo(String token) throws Exception {
-        FrontUser userInfo = permissionService.getUserInfo(token);
-        if(userInfo==null) {
-            return ResponseEntity.status(401).body(false);
-        } else {
-            return ResponseEntity.ok(userInfo);
-        }
-    }
+public class UserController extends BaseController<UserBiz, User> {
+	@Autowired
+	private PermissionService permissionService;
 
-    @RequestMapping(value = "/front/menus", method = RequestMethod.GET)
-    public @ResponseBody
-    List<MenuTree> getMenusByUsername(String token) throws Exception {
-        return permissionService.getMenusByUsername(token);
-    }
+	@RequestMapping(value = "/front/info", method = RequestMethod.GET)
+	@ResponseBody
+	public ResponseEntity<?> getUserInfo(String token) throws Exception {
+		FrontUser userInfo = permissionService.getUserInfo(token);
+		if (userInfo == null) {
+			return ResponseEntity.status(401).body(false);
+		} else {
+			return ResponseEntity.ok(userInfo);
+		}
+	}
+
+	@RequestMapping(value = "/front/menus", method = RequestMethod.GET)
+	public @ResponseBody List<MenuTree> getMenusByUsername(String token) throws Exception {
+		return permissionService.getMenusByUsername(token);
+	}
 }
