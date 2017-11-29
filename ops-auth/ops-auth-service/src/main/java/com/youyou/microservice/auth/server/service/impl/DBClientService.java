@@ -8,8 +8,8 @@ import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
+import com.yonyou.cloud.common.service.utils.UUIDUtils;
 import com.yonyou.microservice.gate.common.exception.GateException;
-import com.yonyou.microservice.gate.common.util.UUIDUtils;
 import com.youyou.microservice.auth.server.bean.ClientInfo;
 import com.youyou.microservice.auth.server.entity.Client;
 import com.youyou.microservice.auth.server.mapper.ClientMapper;

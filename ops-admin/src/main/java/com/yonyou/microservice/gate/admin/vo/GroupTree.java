@@ -1,6 +1,6 @@
 package com.yonyou.microservice.gate.admin.vo;
 
-import com.yonyou.microservice.gate.common.vo.TreeNode;
+import com.yonyou.cloud.common.service.utils.TreeNode;
 
 /**
  * ${DESCRIPTION}

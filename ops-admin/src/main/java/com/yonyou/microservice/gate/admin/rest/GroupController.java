@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.yonyou.cloud.common.beans.RestResultResponse;
 import com.yonyou.cloud.common.controller.BaseController;
+import com.yonyou.cloud.common.service.utils.TreeUtil;
 import com.yonyou.microservice.gate.admin.biz.GroupBiz;
 import com.yonyou.microservice.gate.admin.biz.ResourceAuthorityBiz;
 import com.yonyou.microservice.gate.admin.constant.AdminCommonConstant;
@@ -21,7 +22,6 @@ import com.yonyou.microservice.gate.admin.entity.Group;
 import com.yonyou.microservice.gate.admin.vo.AuthorityMenuTree;
 import com.yonyou.microservice.gate.admin.vo.GroupTree;
 import com.yonyou.microservice.gate.admin.vo.GroupUsers;
-import com.yonyou.microservice.gate.common.util.TreeUtil;
 
 import io.swagger.annotations.Api;
 import tk.mybatis.mapper.entity.Example;

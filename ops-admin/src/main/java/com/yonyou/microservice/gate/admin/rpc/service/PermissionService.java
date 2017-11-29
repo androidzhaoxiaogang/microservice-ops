@@ -10,6 +10,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.yonyou.cloud.common.service.utils.TreeUtil;
 import com.yonyou.microservice.auth.client.jwt.UserAuthUtil;
 import com.yonyou.microservice.gate.admin.biz.ElementBiz;
 import com.yonyou.microservice.gate.admin.biz.MenuBiz;
@@ -21,7 +22,6 @@ import com.yonyou.microservice.gate.admin.entity.User;
 import com.yonyou.microservice.gate.admin.vo.FrontUser;
 import com.yonyou.microservice.gate.admin.vo.MenuTree;
 import com.yonyou.microservice.gate.common.constant.CommonConstants;
-import com.yonyou.microservice.gate.common.util.TreeUtil;
 import com.yonyou.microservice.gate.common.vo.authority.PermissionInfo;
 import com.yonyou.microservice.gate.common.vo.user.UserInfo;
 

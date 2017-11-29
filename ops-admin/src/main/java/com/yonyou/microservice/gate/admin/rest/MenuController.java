@@ -12,13 +12,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.yonyou.cloud.common.controller.BaseController;
+import com.yonyou.cloud.common.service.utils.TreeUtil;
 import com.yonyou.microservice.gate.admin.biz.MenuBiz;
 import com.yonyou.microservice.gate.admin.biz.UserBiz;
 import com.yonyou.microservice.gate.admin.constant.AdminCommonConstant;
 import com.yonyou.microservice.gate.admin.entity.Menu;
 import com.yonyou.microservice.gate.admin.vo.AuthorityMenuTree;
 import com.yonyou.microservice.gate.admin.vo.MenuTree;
-import com.yonyou.microservice.gate.common.util.TreeUtil;
 
 import tk.mybatis.mapper.entity.Example;
 

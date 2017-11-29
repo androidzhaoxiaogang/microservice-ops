@@ -6,7 +6,7 @@ import java.util.List;
 
 import org.springframework.beans.BeanUtils;
 
-import com.yonyou.microservice.gate.common.vo.TreeNode;
+import com.yonyou.cloud.common.service.utils.TreeNode;
 
 /**
  * ${DESCRIPTION}
