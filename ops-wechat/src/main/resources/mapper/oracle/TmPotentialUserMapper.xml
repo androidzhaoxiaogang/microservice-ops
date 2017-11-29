@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yonyou.dmc.service.wechat.dao.TmPotentialUserMapper" >
+  <resultMap id="BaseResultMap" type="com.yonyou.dmc.service.wechat.entity.TmPotentialUser" >
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <id column="POTENTIAL_USER_ID" property="potentialUserId" jdbcType="DECIMAL" />
+    <result column="DEVICE_OPEN_ID" property="deviceOpenId" jdbcType="VARCHAR" />
+    <result column="NICKNAME" property="nickname" jdbcType="VARCHAR" />
+    <!-- <result column="SUBSCRIBE_DATE" property="subscribeDate" jdbcType="TIMESTAMP" />
+    <result column="APP_TYPE" property="appType" jdbcType="DECIMAL" />
+    <result column="VERSION" property="version" jdbcType="VARCHAR" />
+    <result column="SOURCE_TYPE" property="sourceType" jdbcType="DECIMAL" />
+    <result column="SERVICE_TYPE" property="serviceType" jdbcType="VARCHAR" />
+    <result column="DEALER_CODE" property="dealerCode" jdbcType="VARCHAR" />
+    <result column="PACKAGE_CODE" property="packageCode" jdbcType="VARCHAR" />
+    <result column="STATUS" property="status" jdbcType="DECIMAL" />
+    <result column="NICKNAME" property="nickname" jdbcType="VARCHAR" />
+    <result column="SEX" property="sex" jdbcType="VARCHAR" />
+    <result column="PROVINCE" property="province" jdbcType="VARCHAR" />
+    <result column="CITY" property="city" jdbcType="VARCHAR" />
+    <result column="COUNTRY" property="country" jdbcType="VARCHAR" />
+    <result column="HEAD_IMGURL" property="headImgurl" jdbcType="VARCHAR" />
+    <result column="AUTHORIZER_APPID" property="authorizerAppid" jdbcType="VARCHAR" />
+    <result column="CREATE_DATE" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="CREATE_BY" property="createBy" jdbcType="DECIMAL" />
+    <result column="UPDATE_DATE" property="updateDate" jdbcType="TIMESTAMP" />
+    <result column="UPDATE_BY" property="updateBy" jdbcType="DECIMAL" /> -->
+  </resultMap>
+
+	<select id="queryUserOpenId" resultMap="BaseResultMap">
+		SELECT POTENTIAL_USER_ID,DEVICE_OPEN_ID
+		  FROM TM_POTENTIAL_USER
+		 WHERE POTENTIAL_USER_ID= #{userId,jdbcType=DECIMAL}
+   </select>
+   
+   
+   <select id="queryUserOpenIdByOwnerId" resultMap="BaseResultMap">
+		SELECT pu.POTENTIAL_USER_ID,pu.DEVICE_OPEN_ID,decode(CO.user_name, null,pu.nickname,CO.user_name) NICKNAME
+      FROM TM_POTENTIAL_USER pu
+      left join Tr_User_Owner uo on uo.potential_user_id = pu.potential_user_id
+      LEFT JOIN tm_car_owner co ON co.user_id = uo.user_id
+     WHERE uo.user_id= #{userId,jdbcType=DECIMAL}
+   </select>
+</mapper>

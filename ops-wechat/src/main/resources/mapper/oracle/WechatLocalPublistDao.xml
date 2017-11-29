@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yonyou.dmc.service.wechat.dao.WechatLocalPublistDao">
+
+	<resultMap id="StringMap" type="java.lang.String"/>
+	
+	<!-- 保存微信发送LOG -->
+	<insert id="wechatSaveResultLog"  parameterType="com.yonyou.dmc.service.wechat.dto.WechatLocalSendLogDto">
+		INSERT INTO TL_WECHAT_SEND_LOG(TL_WECHAT_SEND_LOG_ID, TYPE, REMARK, 
+		IS_SUCCESS, ERROR_INFO, CREATE_DATE,    CREATE_BY)
+		VALUES(SEQ_TL_WECHAT_SEND_LOG.NEXTVAL, #{type, jdbcType=INTEGER}, #{remark, jdbcType=VARCHAR},
+		#{isSuccess, jdbcType=INTEGER}, #{errorInfo, jdbcType = VARCHAR}, SYSDATE, 9999)
+	</insert>
+	
+	<!-- 获得需要批量推送的用户OPEN ID -->
+	<select id="getWechatSendOpenIdList" resultMap="StringMap">
+		SELECT DEVICE_OPEN_ID FROM TM_POTENTIAL_USER WHERE SOURCE_TYPE = '10011001' AND STATUS = '10011001'
+		AND DEALER_CODE = #{param1, jdbcType=VARCHAR}
+	</select>
+	
+	<!-- 更新图片的URL -->
+	<update id="modifyWechatImageUrl">
+		UPDATE TM_NEWS_ACTIVITY_INFO SET WECHAT_TITLE_IMAGE_URL = #{param1, jdbcType=VARCHAR} WHERE NAI_ID = #{param2, jdbcType=BIGINT}
+	</update>
+	
+</mapper>

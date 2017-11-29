@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yonyou.dmc.service.wechat.dao.DealerWoTemplateDao">
+
+  <resultMap id="BaseResultMap" type="com.yonyou.dmc.service.wechat.entity.DealerWoTemplate" >
+    <id column="WO_TEMPLATE_ID" property="woTemplateId" jdbcType="DECIMAL" />
+    <result column="AUTHORIZER_APPID" property="authorizerAppid" jdbcType="VARCHAR" />
+    <result column="TEMPLATE_ID" property="templateId" jdbcType="VARCHAR" />
+    <result column="TEMPLATE_NUM" property="templateNum" jdbcType="VARCHAR" />
+    <result column="TITLE" property="title" jdbcType="VARCHAR" />
+    <result column="PRIMARY_INDUSTRY" property="primaryIndustry" jdbcType="VARCHAR" />
+    <result column="DEPUTY_INDUSTRY" property="deputyIndustry" jdbcType="VARCHAR" />
+    <result column="CONTENT" property="content" jdbcType="VARCHAR" />
+    <result column="EXAMPLE" property="example" jdbcType="VARCHAR" />
+    <result column="CREATE_DATE" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="UPDATE_DATE" property="updateDate" jdbcType="TIMESTAMP" />
+    <result column="CREATE_BY" property="createBy" jdbcType="DECIMAL" />
+    <result column="UPDATE_BY" property="updateBy" jdbcType="DECIMAL" />
+  </resultMap>
+  
+  <sql id="Base_Column_List" >
+    t.WO_TEMPLATE_ID as WO_TEMPLATE_ID, t.AUTHORIZER_APPID as AUTHORIZER_APPID, 
+    t.TEMPLATE_ID as TEMPLATE_ID, t.TEMPLATE_NUM as TEMPLATE_NUM, 
+    t.TITLE as TITLE, t.PRIMARY_INDUSTRY as PRIMARY_INDUSTRY, 
+    t.DEPUTY_INDUSTRY as DEPUTY_INDUSTRY, t.CONTENT as CONTENT, 
+    t.EXAMPLE as EXAMPLE, t.CREATE_DATE as CREATE_DATE, 
+    t.UPDATE_DATE as UPDATE_DATE, t.CREATE_BY as CREATE_BY, 
+    t.UPDATE_BY as UPDATE_BY
+  </sql>
+  
+  <delete id="deleteDealerWoTemplateByAuthorizerAppid">
+    delete from TM_DEALER_WO_TEMPLATE
+    where AUTHORIZER_APPID = #{authorizerAppid,jdbcType=VARCHAR}
+  </delete>
+  
+  <insert id="insertDealerWoTemplate" parameterType="com.yonyou.dmc.service.wechat.entity.DealerWoTemplate" >
+    <selectKey resultType="Long" order="BEFORE" keyProperty="woTemplateId" >
+      select SEQ_TM_DEALER_WO_TEMPLATE.NEXTVAL as woTemplateId  from dual
+    </selectKey>
+    
+    insert into TM_DEALER_WO_TEMPLATE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+        WO_TEMPLATE_ID,
+      <if test="authorizerAppid != null" >
+        AUTHORIZER_APPID,
+      </if>
+      <if test="templateId != null" >
+        TEMPLATE_ID,
+      </if>
+      <if test="templateNum != null" >
+        TEMPLATE_NUM,
+      </if>
+      <if test="title != null" >
+        TITLE,
+      </if>
+      <if test="primaryIndustry != null" >
+        PRIMARY_INDUSTRY,
+      </if>
+      <if test="deputyIndustry != null" >
+        DEPUTY_INDUSTRY,
+      </if>
+      <if test="content != null" >
+        CONTENT,
+      </if>
+      <if test="example != null" >
+        EXAMPLE,
+      </if>
+      <if test="createDate != null" >
+        CREATE_DATE,
+      </if>
+      <if test="createBy != null" >
+        CREATE_BY,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+        #{woTemplateId,jdbcType=DECIMAL},
+      <if test="authorizerAppid != null" >
+        #{authorizerAppid,jdbcType=VARCHAR},
+      </if>
+      <if test="templateId != null" >
+        #{templateId,jdbcType=VARCHAR},
+      </if>
+      <if test="templateNum != null" >
+        #{templateNum,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="primaryIndustry != null" >
+        #{primaryIndustry,jdbcType=VARCHAR},
+      </if>
+      <if test="deputyIndustry != null" >
+        #{deputyIndustry,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="example != null" >
+        #{example,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  
+  <select id="queryDealerWoTemplateByAuthIdAndTemNum" resultMap="BaseResultMap">
+  
+    select 
+    <include refid="Base_Column_List" />
+    from TM_DEALER_WO_TEMPLATE t
+    where  t.TEMPLATE_NUM = #{templateNum,jdbcType=VARCHAR}
+  
+  </select>
+  
+
+</mapper>

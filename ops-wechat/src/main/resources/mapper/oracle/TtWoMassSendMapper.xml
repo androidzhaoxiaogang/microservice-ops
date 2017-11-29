@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yonyou.dmc.service.wechat.dao.TtWoMassSendMapper" >
+  <resultMap id="BaseResultMap" type="com.yonyou.dmc.service.wechat.entity.TtWoMassSend" >
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <result column="WO_MASS_SEND_ID" property="woMassSendId" jdbcType="DECIMAL" />
+    <result column="OPEN_ID" property="openId" jdbcType="VARCHAR" />
+    <result column="AUTHORIZER_APPID" property="authorizerAppid" jdbcType="VARCHAR" />
+    <result column="TITLE" property="title" jdbcType="VARCHAR" />
+    <result column="TITLE_IMAGE_URL" property="titleImageUrl" jdbcType="VARCHAR" />
+    <result column="WECHAT_TITLE_IMAGE_URL" property="wechatTitleImageUrl" jdbcType="VARCHAR" />
+    <result column="CONTENT_URL" property="contentUrl" jdbcType="VARCHAR" />
+    <result column="OBJECT_TYPE" property="objectType" jdbcType="VARCHAR" />
+    <result column="OBJECT_ID" property="objectId" jdbcType="DECIMAL" />
+    <result column="STATUS" property="status" jdbcType="VARCHAR" />
+    <result column="CREATE_DATE" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="UPDATE_DATE" property="updateDate" jdbcType="TIMESTAMP" />
+    <result column="MEDIA_ID" property="mediaId" jdbcType="VARCHAR" />
+    <result column="PICTXT_ID" property="picTxtId" jdbcType="VARCHAR" />
+    <result column="CONTENT" property="content" jdbcType="VARCHAR" />
+    <result column="CONTENT_SOURCE_URL" property="contentSourceUrl" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ImageUrl" type="com.yonyou.dmc.service.wechat.entity.TtWoMassSend" >
+    <result column="OBJECT_ID" property="objectId" jdbcType="DECIMAL" />
+    <result column="TITLE_IMAGE_URL" property="titleImageUrl" jdbcType="VARCHAR" />
+  </resultMap>
+  	<update id="updateMassSend" parameterType="com.yonyou.dmc.service.wechat.dto.WechatLocalSendLogDto">
+		SELECT WO_MASS_SEND_ID ,OPEN_ID
+		FROM TT_WO_MASS_SEND WHERE SOURCE_TYPE = '10011001' AND STATUS = '10011001'
+		AND DEALER_CODE = #{param1, jdbcType=VARCHAR}
+	</update>
+	
+  	<update id="updateMediaId" parameterType="java.util.HashMap">
+		update TT_WO_MASS_SEND
+		set MEDIA_ID=#{mediaId, jdbcType=VARCHAR}
+		WHERE STATUS = '0'
+		AND OBJECT_ID = #{objectId, jdbcType=DECIMAL}
+	</update>
+	
+  	<update id="updatePicTextMediaId" parameterType="java.util.HashMap">
+		update TT_WO_MASS_SEND
+		set PICTXT_ID=#{picTxtId, jdbcType=VARCHAR},STATUS='1'
+		WHERE STATUS = '0' and
+		${condition}
+	</update>
+	
+  	<select id="selectUnSendWithDistinctObjectId" resultMap="BaseResultMap">
+		SELECT OBJECT_ID ,TITLE_IMAGE_URL
+		FROM TT_WO_MASS_SEND WHERE STATUS = '0'
+		group by object_id,TITLE_IMAGE_URL
+	</select>
+	
+  	<select id="selectUnSend" resultMap="BaseResultMap">
+		SELECT WO_MASS_SEND_ID ,OPEN_ID, AUTHORIZER_APPID,TITLE, TITLE_IMAGE_URL,WECHAT_TITLE_IMAGE_URL,
+		CONTENT_URL, OBJECT_TYPE,OBJECT_ID,STATUS,CREATE_DATE,UPDATE_DATE,MEDIA_ID,PICTXT_ID,CONTENT,
+		CONTENT_SOURCE_URL
+		FROM TT_WO_MASS_SEND WHERE STATUS = '0'
+		order by open_id,object_id
+	</select>
+</mapper>
