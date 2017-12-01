@@ -13,6 +13,8 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+import org.springframework.web.servlet.handler.SimpleUrlHandlerMapping;
+import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
 
 import com.alibaba.fastjson.JSON;
 import com.google.common.base.Predicate;
@@ -71,8 +73,15 @@ public class AdminAccessFilter extends ZuulFilter {
 
     @Autowired
     private ServiceAuthUtil serviceAuthUtil;
+    @Autowired
+    RequestMappingHandlerMapping mapping1;
+    @Autowired
+    SimpleUrlHandlerMapping mapping2;
     
     public AdminAccessFilter(){
+//    	RequestMappingInfo info=new RequestMappingInfo(null,null);
+//    	mapping2.s
+//    	mapping.registerMapping(info, this, null);
     	logger.info("--AdminAccessFilter对象创建");
     }
 

@@ -1,9 +1,11 @@
 package com.yonyou.microservice.gate.admin.rpc;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -24,6 +26,11 @@ import com.yonyou.microservice.gate.common.vo.user.UserInfo;
 public class UserRest {
     @Autowired
     private PermissionService permissionService;
+
+    @RequestMapping(value = "/user/username",method = RequestMethod.POST, produces="application/json")
+    public  @ResponseBody UserInfo getUserByUsername(@RequestBody Map<String,String> data) {
+        return permissionService.getUserByUsername(data.get("username"));
+    }
 
     @RequestMapping(value = "/user/username/{username}",method = RequestMethod.GET, produces="application/json")
     public  @ResponseBody UserInfo getUserByUsername(@PathVariable("username")String username) {

@@ -45,6 +45,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
     private ArrayList<String> getExcludeCommonPathPatterns(){
         ArrayList<String> list = new ArrayList<>();
         String[] urls = {
+        		"/api/**",
                 "/v2/api-docs",
                 "/swagger-resources/**"
         };

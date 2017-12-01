@@ -2,6 +2,11 @@ package com.yonyou.microservice.gate.server;
 
 
 import java.text.ParseException;
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
@@ -15,6 +20,9 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.handler.SimpleUrlHandlerMapping;
+import org.springframework.web.servlet.mvc.Controller;
 
 import com.yonyou.cloud.zuul.db.api.EnableZuulProxyStore;
 import com.yonyou.microservice.auth.client.EnableAceAuthClient;
@@ -41,6 +49,8 @@ import com.yonyou.microservice.gate.server.utils.DBLog;
 public class GateBootstrap {
 	@Autowired
 	private RateLimitProperties p;
+
+    
     @RequestMapping(value = "/test", method = RequestMethod.GET)
     public String test(){
     	return "ok";
@@ -54,6 +64,8 @@ public class GateBootstrap {
 //    	if(l1<l2){
 //    		System.out.println("--------");
 //    	}
+//    	RequestMappingInfo info=new RequestMappingInfo(null,null);
+//    	info.equals(GateBootstrap.class);
         DBLog.getInstance().start();
         SpringApplication.run(GateBootstrap.class, args);
     }
@@ -63,4 +75,17 @@ public class GateBootstrap {
     IUserPrincipal userPrincipal(){
         return new UserPrincipal();
     }
+}
+ class TestController implements Controller{//implements Controller
+
+	@Override
+	public ModelAndView handleRequest(HttpServletRequest p0, HttpServletResponse p1) throws Exception {
+		System.out.println("--x");
+		Map<String, String> map=new HashMap();
+		map.put("ab", "value");
+		
+		p1.getOutputStream().write(map.toString().getBytes());
+		return null;
+	}
+	
 }

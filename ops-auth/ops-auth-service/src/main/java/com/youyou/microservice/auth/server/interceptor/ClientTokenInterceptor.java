@@ -23,6 +23,8 @@ public class ClientTokenInterceptor implements RequestInterceptor {
     @Override
     public void apply(RequestTemplate requestTemplate) {
         try {
+        	if(requestTemplate.toString().contains("/api/authProvider"))
+        		return;
             requestTemplate.header(clientConfig.getClientTokenHeader(), clientService.apply(clientConfig.getClientId(), clientConfig.getClientSecret()));
         } catch (Exception e) {
             e.printStackTrace();

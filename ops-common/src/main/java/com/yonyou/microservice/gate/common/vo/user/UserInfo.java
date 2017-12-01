@@ -16,6 +16,7 @@ public class UserInfo implements Serializable{
     public String name;
     private String description;
     private String telPhone;
+    private String captcha;
 
     public Date getUpdTime() {
         return updTime;
@@ -73,6 +74,14 @@ public class UserInfo implements Serializable{
 
 	public void setTelPhone(String telPhone) {
 		this.telPhone = telPhone;
+	}
+
+	public String getCaptcha() {
+		return captcha;
+	}
+
+	public void setCaptcha(String captcha) {
+		this.captcha = captcha;
 	}
     
 }

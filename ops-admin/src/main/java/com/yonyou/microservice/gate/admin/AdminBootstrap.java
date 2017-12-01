@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.yonyou.microservice.auth.client.EnableAceAuthClient;
+import com.yonyou.microservice.auth.client.annotation.IgnoreClientToken;
+import com.yonyou.microservice.auth.client.annotation.IgnoreUserToken;
 
 /**
  * ${DESCRIPTION}
@@ -26,6 +28,8 @@ import com.yonyou.microservice.auth.client.EnableAceAuthClient;
 @EnableAceAuthClient
 @ServletComponentScan("com.yonyou.microservice.gate.admin.config.druid")
 @RestController
+@IgnoreUserToken
+@IgnoreClientToken
 public class AdminBootstrap {
     public static void main(String[] args) {
 //    	String password = new BCryptPasswordEncoder(UserConstant.PW_ENCORDER_SALT).encode("wys");
