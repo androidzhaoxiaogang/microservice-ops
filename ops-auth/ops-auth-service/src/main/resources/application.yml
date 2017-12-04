@@ -12,7 +12,7 @@ spring:
             max-active: 20
     datasource:
       name: test
-      url: jdbc:mysql://10.180.8.205:3306/ag_gate?useUnicode=true&characterEncoding=UTF8
+      url: jdbc:mysql://10.180.8.205:3306/ag_admin?useUnicode=true&characterEncoding=UTF8
       username: root
       password: rcs
       # 使用druid数据源

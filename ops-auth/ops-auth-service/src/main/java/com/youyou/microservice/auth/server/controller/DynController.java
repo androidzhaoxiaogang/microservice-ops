@@ -23,13 +23,14 @@ import com.xiaoleilu.hutool.json.JSONObject;
 import com.yonyou.cloud.common.jwt.JWTInfo;
 import com.yonyou.cloud.common.vo.user.UserInfo;
 import com.yonyou.microservice.gate.common.vo.user.AuthProviderInfo;
+import com.youyou.microservice.auth.server.entity.AuthProvider;
 import com.youyou.microservice.auth.server.util.user.JwtTokenUtil;
 
 public class DynController implements Controller{
 	private static Logger logger=Logger.getLogger(DynController.class);
 	public static final String ACCEPT_USER="user";
 	public static final String ACCEPT_USER_PASSWORD="userAndPassword";
-	private List<AuthProviderInfo> providers;
+	private List<AuthProvider> providers;
     private BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(12);
     @Autowired
     private JwtTokenUtil jwtTokenUtil;
@@ -37,8 +38,8 @@ public class DynController implements Controller{
 	@Autowired
 	private RestTemplate restTemplate;
 
-	private AuthProviderInfo getService(String name){
-		for(AuthProviderInfo i:providers){
+	private AuthProvider getService(String name){
+		for(AuthProvider i:providers){
 			if(name.contains(i.getSrcUrl())){
 				return i;
 			}
@@ -64,7 +65,7 @@ public class DynController implements Controller{
 		logger.info("--DynController.handleRequest");
 		String uri=p0.getRequestURI();
 		logger.info("--DynController,uri="+uri);
-		AuthProviderInfo pInfo=this.getService(uri);
+		AuthProvider pInfo=this.getService(uri);
 		if(pInfo!=null && !"".equals(pInfo.getAuthService())){
 			logger.info("--DynController,service="+pInfo.getAuthService());
 			String body=this.getBody(p0);
@@ -85,11 +86,11 @@ public class DynController implements Controller{
 		return null;
 	}
 
-	public List<AuthProviderInfo> getProviders() {
+	public List<AuthProvider> getProviders() {
 		return providers;
 	}
 
-	public void setProviders(List<AuthProviderInfo> providers) {
+	public void setProviders(List<AuthProvider> providers) {
 		this.providers = providers;
 	}
 

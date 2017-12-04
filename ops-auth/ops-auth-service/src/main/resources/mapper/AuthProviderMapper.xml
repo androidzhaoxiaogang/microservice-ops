@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.youyou.microservice.auth.server.mapper.AuthProviderMapper" >
+  <resultMap id="BaseResultMap" type="com.youyou.microservice.auth.server.entity.AuthProvider" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="src_url" property="srcUrl" jdbcType="VARCHAR" />
+    <result column="auth_service" property="authService" jdbcType="VARCHAR" />
+    <result column="accept_type" property="acceptType" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <select id="selectAuthProviders" resultType="BaseResultMap">
+   SELECT
+                    id,src_url,auth_service,accept_type
+                 FROM
+                      gate_auth_provider
+  </select>
+</mapper>

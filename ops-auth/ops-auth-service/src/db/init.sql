@@ -1,9 +1,9 @@
-
-CREATE DATABASE ag_gate DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-Use ag_gate;
+﻿
+CREATE DATABASE ag_admin DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+Use ag_admin;
 
 -- ----------------------------
---  Table structure for `base_element`
+--  Table structure for `gate_base_element`
 -- ----------------------------
 DROP TABLE IF EXISTS `base_element`;
 CREATE TABLE `base_element` (
