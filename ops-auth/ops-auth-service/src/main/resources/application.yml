@@ -1,6 +1,6 @@
 spring:
     application:
-        name: gate-auth
+        name: auth-service
     jackson:
         date-format: yyyy-MM-dd HH:mm:ss
         time-zone: GMT+8

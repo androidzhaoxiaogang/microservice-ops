@@ -75,12 +75,15 @@ public class DynController implements Controller{
 			HttpEntity<String> entity = new HttpEntity<String>(body, headers);
 			ResponseEntity<UserInfo> r=restTemplate.exchange(pInfo.getAuthService(), HttpMethod.POST, entity, UserInfo.class);
 			JSONObject sk=new JSONObject(r.getBody());
-	        String token = "token=";
+	        String token = "{\"token\":\"";
 			if(pInfo.getAcceptType().equals(ACCEPT_USER)){
 		        if (encoder.matches((String)rBody.get("password"), r.getBody().getPassword())) {
 		            token = token+jwtTokenUtil.generateToken(new JWTInfo(r.getBody().getUsername(), r.getBody().getId() + "", r.getBody().getName()));
 		        }
+			}else{
+				token = token+jwtTokenUtil.generateToken(new JWTInfo(r.getBody().getUsername(), r.getBody().getId() + "", r.getBody().getName()));
 			}
+			token=token+"\"}";
 			p1.getOutputStream().write(token.getBytes());
 		}
 		return null;

@@ -17,7 +17,7 @@ eureka:
 #        ip-address: 127.0.0.1
     client:
         serviceUrl:
-            defaultZone: http://121.196.193.149:8763/eureka/
+            defaultZone: http://121.196.193.149:8761/eureka/
                     # docker 部署开启
 #            defaultZone: http://center:8761/eureka/
 

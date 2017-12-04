@@ -13,7 +13,6 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-import org.springframework.web.servlet.handler.SimpleUrlHandlerMapping;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
 
 import com.alibaba.fastjson.JSON;
@@ -30,9 +29,11 @@ import com.yonyou.microservice.auth.client.jwt.UserAuthUtil;
 import com.yonyou.microservice.gate.common.context.BaseContextHandler;
 import com.yonyou.microservice.gate.common.msg.TokenErrorResponse;
 import com.yonyou.microservice.gate.common.msg.TokenForbiddenResponse;
+import com.yonyou.microservice.gate.common.vo.authority.IgnoreUriInfo;
 import com.yonyou.microservice.gate.common.vo.authority.PermissionInfo;
 import com.yonyou.microservice.gate.common.vo.log.LogInfo;
 import com.yonyou.microservice.gate.common.vo.user.UserInfo;
+import com.yonyou.microservice.gate.server.feign.IIgnoreUriService;
 import com.yonyou.microservice.gate.server.feign.ILogService;
 import com.yonyou.microservice.gate.server.feign.IUserService;
 import com.yonyou.microservice.gate.server.utils.DBLog;
@@ -76,7 +77,9 @@ public class AdminAccessFilter extends ZuulFilter {
     @Autowired
     RequestMappingHandlerMapping mapping1;
     @Autowired
-    SimpleUrlHandlerMapping mapping2;
+    IIgnoreUriService iIgnoreUriService;
+    private List<IgnoreUriInfo> startWithList;
+    
     
     public AdminAccessFilter(){
 //    	RequestMappingInfo info=new RequestMappingInfo(null,null);
@@ -217,6 +220,21 @@ public class AdminAccessFilter extends ZuulFilter {
     }
 
 
+//    /**
+//     * URI是否以什么打头
+//     * @param requestUri
+//     * @return
+//     */
+//    private boolean isStartWith(String requestUri) {
+//        boolean flag = false;
+//        for (String s : startWith.split(",")) {
+//            if (requestUri.startsWith(s)) {
+//                return true;
+//            }
+//        }
+//        return flag;
+//    }
+
     /**
      * URI是否以什么打头
      * @param requestUri
@@ -224,14 +242,17 @@ public class AdminAccessFilter extends ZuulFilter {
      */
     private boolean isStartWith(String requestUri) {
         boolean flag = false;
-        for (String s : startWith.split(",")) {
-            if (requestUri.startsWith(s)) {
+        if(startWithList==null){
+        	startWithList=this.iIgnoreUriService.getIgnoreUris();
+        }
+        for (IgnoreUriInfo s : startWithList) {
+            if (requestUri.startsWith(s.getUri())) {
                 return true;
             }
         }
         return flag;
     }
-
+    
     /**
      * Reports an error message given a response body and code.
      *

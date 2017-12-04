@@ -45,14 +45,14 @@ zuul:
 
     auth:
       path: /auth/**
-      serviceId: gate-auth
+      serviceId: auth-service
     captcha:
       path: /captcha/**
-      serviceId: gate-auth
+      serviceId: auth-service
       strip-prefix: false
     wechat:
       path: /wechat/**
-      serviceId: gate-wechat
+      serviceId: wechat-service
   store:
     mysql:
       enabled: true
@@ -98,7 +98,7 @@ logging:
   level:
     root: info
 auth:
-  serviceId: gate-auth
+  serviceId: auth-service
   user:
     token-header: Authorization
     pub-key:

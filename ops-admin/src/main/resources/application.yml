@@ -60,7 +60,7 @@ swagger:
 
 
 auth:
-  serviceId: gate-auth
+  serviceId: auth-service
   user:
     token-header: Authorization
     pub-key:
