@@ -11,9 +11,9 @@ spring:
         default-property-inclusion: non_null
     datasource:
         name: test
-        url: jdbc:mysql://10.180.8.205:3306/ag_admin?useUnicode=true&characterEncoding=UTF8
-        username: root
-        password: rcs
+        url: ${db.yc_base.url:jdbc:mysql://10.180.8.205:3306/yc_base?useUnicode=true&amp;characterEncoding=utf8mb4}
+        username: ${db.yc_base.username:root}
+        password: ${db.yc_base.pwd:rcs}
         # 使用druid数据源
         type: com.alibaba.druid.pool.DruidDataSource
         driver-class-name: com.mysql.jdbc.Driver
@@ -35,7 +35,7 @@ mybatis:
     xmlLocation: classpath:mapper/**/*.xml
 
 server:
-    port: 8760
+    port: ${ops.admin.port:8760} 
 
 eureka:
     instance:
@@ -48,7 +48,7 @@ eureka:
         registerWithEureka: true
         fetchRegistry: true
         serviceUrl:
-            defaultZone: http://121.196.193.149:8761/eureka/
+            defaultZone: ${eureka.url:http://121.196.193.149:8761/eureka/}
                     # docker 部署开启
 #            defaultZone: http://center:8761/eureka/
 swagger:
