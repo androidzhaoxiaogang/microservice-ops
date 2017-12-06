@@ -48,6 +48,11 @@
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-eureka</artifactId>
 		</dependency>
+		
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-config</artifactId>
+		</dependency>
 
 		<!-- 数据库驱动 <dependency> <groupId>com.alibaba</groupId> <artifactId>druid</artifactId> 
 			<version>1.0.11</version> </dependency> -->
@@ -92,7 +97,26 @@
 			<artifactId>mysql-connector-java</artifactId>
 			<version>5.1.30</version>
 		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/com.google.guava/guava -->
+		<dependency>
+		    <groupId>com.google.guava</groupId>
+		    <artifactId>guava</artifactId>
+		    <version>20.0</version>
+		</dependency>
 	</dependencies>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-dependencies</artifactId>
+				<version>${spring-cloud.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 
 	<build>
 		<plugins>
@@ -103,6 +127,18 @@
 					<source>1.8</source>
 					<target>1.8</target>
 				</configuration>
+			</plugin>
+			
+			<plugin>
+			    <groupId>org.springframework.boot</groupId>
+			    <artifactId>spring-boot-maven-plugin</artifactId>
+			    <executions>
+				<execution>
+				    <goals>
+					<goal>build-info</goal>
+				    </goals>
+				</execution>
+			    </executions>
 			</plugin>
 		</plugins>
 	</build>

@@ -7,7 +7,7 @@ spring:
         default-property-inclusion: non_null
     redis:
         database: 1
-        host: 127.0.0.1
+        host: ${redis.host:10.180.8.220}
         pool:
             max-active: 20
     datasource:
@@ -66,11 +66,11 @@ eureka:
         statusPageUrlPath: /info
         healthCheckUrlPath: /health
         # docker 部署开启
-#        prefer-ip-address: true
+        prefer-ip-address: true
 #        ip-address: 127.0.0.1
     client:
         serviceUrl:
-            defaultZone: ${eureka.url:http://121.196.193.149:8761/eureka/}
+            defaultZone: ${eureka.url:http://10.180.4.221:8761/eureka//}
                     # docker 部署开启
 #            defaultZone: http://center:8761/eureka/
 
