@@ -8,12 +8,13 @@ spring:
     jackson:
         date-format: yyyy-MM-dd HH:mm:ss
         time-zone: GMT+8
-        default-property-inclusion: non_null
+        default-property-inclusion: NON_NULL
     datasource:
         name: test
-        url: ${db.yc_base.url:jdbc:mysql://10.180.8.205:3306/yc_base?useUnicode=true&amp;characterEncoding=utf8mb4}
+#        :jdbc:mysql://10.180.8.205:3306/ag_admin?useUnicode=true&characterEncoding=UTF8
+        url: ${db.yc_base.url}
         username: ${db.yc_base.username:root}
-        password: ${db.yc_base.pwd:rcs}
+        password: ${db.yc_base.password:rcs}
         # 使用druid数据源
         type: com.alibaba.druid.pool.DruidDataSource
         driver-class-name: com.mysql.jdbc.Driver
@@ -35,7 +36,7 @@ mybatis:
     xmlLocation: classpath:mapper/**/*.xml
 
 server:
-    port: ${ops.admin.port:8760} 
+    port: ${ops.admin.port:8760}
 
 eureka:
     instance:
@@ -44,11 +45,11 @@ eureka:
         # docker 部署开启
 #        prefer-ip-address: true
 #        ip-address: 127.0.0.1
-    client:
-        registerWithEureka: true
-        fetchRegistry: true
-        serviceUrl:
-            defaultZone: ${eureka.url:http://121.196.193.149:8761/eureka/}
+#    client:
+#        registerWithEureka: true
+#        fetchRegistry: true
+#        serviceUrl:
+#            defaultZone: ${eureka.url:http://121.196.193.149:8761/eureka/}
                     # docker 部署开启
 #            defaultZone: http://center:8761/eureka/
 swagger:

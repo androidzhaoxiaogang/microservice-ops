@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.yonyou.cloud</groupId>
 	<artifactId>ops-admin</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>20171206</version>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -31,13 +31,13 @@
 			<artifactId>ops-common</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
-		
+
 		<dependency>
-				<groupId>com.yonyou.cloud</groupId>
-				<artifactId>common-elegance</artifactId>
-				<version>0.0.1-SNAPSHOT</version>
+			<groupId>com.yonyou.cloud</groupId>
+			<artifactId>common-elegance</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-jdbc</artifactId>
@@ -69,19 +69,19 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-actuator</artifactId>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>com.spring4all</groupId>
 			<artifactId>spring-boot-starter-swagger</artifactId>
 			<version>1.5.1.RELEASE</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>com.alibaba</groupId>
 			<artifactId>druid-spring-boot-starter</artifactId>
 			<version>1.1.4</version>
 		</dependency>
-		
+
 		<!-- 通用mapper -->
 		<dependency>
 			<groupId>tk.mybatis</groupId>
@@ -90,75 +90,38 @@
 		</dependency>
 
 		<!-- 通用翻页 -->
-		<dependency>
-			<groupId>com.github.pagehelper</groupId>
-			<artifactId>pagehelper-spring-boot-starter</artifactId>
-			<version>${pagehelpStarter.version}</version>
-		</dependency>
-		
+		<!-- <dependency> <groupId>com.github.pagehelper</groupId> <artifactId>pagehelper-spring-boot-starter</artifactId> 
+			<version>${pagehelpStarter.version}</version> </dependency> -->
+
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 			<scope>runtime</scope>
 		</dependency>
-		
-		<!--通过starter简化配置-->
+
+		<!--通过starter简化配置 -->
 		<dependency>
 			<groupId>com.alibaba</groupId>
 			<artifactId>druid-spring-boot-starter</artifactId>
 			<version>1.1.4</version>
 		</dependency>
-		
-		<!-- druid 
-		<dependency>
-			<groupId>com.alibaba</groupId>
-			<artifactId>druid</artifactId>
-			<version>1.0.11</version>
-		</dependency>
-		<dependency>
-			<groupId>mysql</groupId>
-			<artifactId>mysql-connector-java</artifactId>
-			<version>5.1.30</version>
-		</dependency>
-		-->
 
-		<!--Mybatis 
-		<dependency>
-			<groupId>org.mybatis</groupId>
-			<artifactId>mybatis</artifactId>
-			<version>${mybatis.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.mybatis</groupId>
-			<artifactId>mybatis-spring</artifactId>
-			<version>${mybatis.spring.version}</version>
-		</dependency>
-		
-		-->
+		<!-- druid <dependency> <groupId>com.alibaba</groupId> <artifactId>druid</artifactId> 
+			<version>1.0.11</version> </dependency> <dependency> <groupId>mysql</groupId> 
+			<artifactId>mysql-connector-java</artifactId> <version>5.1.30</version> </dependency> -->
 
-		<!-- Mybatis Generator 
-		<dependency>
-			<groupId>org.mybatis.generator</groupId>
-			<artifactId>mybatis-generator-core</artifactId>
-			<version>1.3.2</version>
-			<scope>compile</scope>
-			<optional>true</optional>
-		</dependency>
--->
-		<!--分页插件 
-		<dependency>
-			<groupId>com.github.pagehelper</groupId>
-			<artifactId>pagehelper</artifactId>
-			<version>${pagehelper.version}</version>
-		</dependency>
--->
-		<!--通用Mapper 
-		<dependency>
-			<groupId>tk.mybatis</groupId>
-			<artifactId>mapper</artifactId>
-			<version>${mapper.version}</version>
-		</dependency>
-		-->
+		<!--Mybatis <dependency> <groupId>org.mybatis</groupId> <artifactId>mybatis</artifactId> 
+			<version>${mybatis.version}</version> </dependency> <dependency> <groupId>org.mybatis</groupId> 
+			<artifactId>mybatis-spring</artifactId> <version>${mybatis.spring.version}</version> 
+			</dependency> -->
+
+		<!-- Mybatis Generator <dependency> <groupId>org.mybatis.generator</groupId> 
+			<artifactId>mybatis-generator-core</artifactId> <version>1.3.2</version> 
+			<scope>compile</scope> <optional>true</optional> </dependency> -->
+		<!--分页插件 <dependency> <groupId>com.github.pagehelper</groupId> <artifactId>pagehelper</artifactId> 
+			<version>${pagehelper.version}</version> </dependency> -->
+		<!--通用Mapper <dependency> <groupId>tk.mybatis</groupId> <artifactId>mapper</artifactId> 
+			<version>${mapper.version}</version> </dependency> -->
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-lang3</artifactId>
@@ -170,7 +133,7 @@
 			<artifactId>fastjson</artifactId>
 			<version>1.2.33</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>
@@ -185,7 +148,17 @@
 			<groupId>com.yonyou.cloud</groupId>
 			<artifactId>ops-auth-client</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
-		</dependency> 
+		</dependency>
+		
+		
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-config</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-eureka</artifactId>
+		</dependency>
 	</dependencies>
 
 
@@ -200,20 +173,19 @@
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
-
+  	
 	<build>
 		<plugins>
-			<!-- 此插件用来生成通用mapper的代码 -->
-			<!-- <plugin> <groupId>org.mybatis.generator</groupId> <artifactId>mybatis-generator-maven-plugin</artifactId> 
-				<version>1.3.2</version> <configuration> <configurationFile>${basedir}/src/main/resources/builder/generatorConfig.xml</configurationFile> 
-				<overwrite>true</overwrite> <verbose>true</verbose> </configuration> <dependencies> 
-				<dependency> <groupId>mysql</groupId> <artifactId>mysql-connector-java</artifactId> 
-				<version>5.1.30</version> <scope>runtime</scope> </dependency> <dependency> 
-				<groupId>tk.mybatis</groupId> <artifactId>mapper</artifactId> <version>${mapper.version}</version> 
-				</dependency> </dependencies> </plugin> -->
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<goals>
+							<goal>build-info</goal>
+						</goals>
+					</execution>
+				</executions>
 				<configuration>
 					<source>1.8</source>
 					<target>1.8</target>

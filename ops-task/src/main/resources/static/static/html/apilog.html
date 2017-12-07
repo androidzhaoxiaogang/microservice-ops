@@ -1,0 +1,122 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+    <meta http-equiv="Cache-Control" content="no-siteapp"/>
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="/lib/html5.js"></script>
+    <script type="text/javascript" src="/lib/respond.min.js"></script>
+    <script type="text/javascript" src="/lib/PIE_IE678.js"></script>
+    <![endif]-->
+    <link rel="stylesheet" type="text/css" href="/static/css/H-ui.css"/>
+    <link rel="stylesheet" type="text/css" href="/lib/Hui-iconfont/1.0.7/iconfont.css"/>
+    <link rel="stylesheet" type="text/css" href="/lib/icheck/icheck.css"/>
+    <!--[if lt IE 9]>
+    <link href="/static/css/H-ui.ie.css" rel="stylesheet" type="text/css"/>
+    <![endif]-->
+    <!--[if IE 6]>
+    <script type="text/javascript" src="../lib/DD_belatedPNG_0.0.8a-min.js"></script>
+    <script>DD_belatedPNG.fix('*');</script>
+    <![endif]-->
+    <title>首页</title>
+    <meta name="keywords" content="关键词,5个左右,单个8汉字以内">
+    <meta name="description" content="网站描述，字数尽量空制在80个汉字，160个字符以内！">
+</head>
+<body>
+<header class="navbar-wrapper">
+    <div class="navbar navbar-black navbar-fixed-top">
+        <div class="container cl">
+            <a class="logo navbar-logo hidden-xs" href="#">接口调用记录</a>
+            <a class="logo navbar-logo-m visible-xs" href="#"></a>
+            <span class="logo navbar-slogan hidden-xs"></span>
+            <a aria-hidden="false" class="nav-toggle Hui-iconfont visible-xs" href="javascript:;">&#xe667;</a>
+        </div>
+    </div>
+</header>
+<section class="container">
+    <h1>API 日志</h1>监控接口API的执行记录
+    <form id="listForm" action="/task/apilogs.json">
+      <input type="hidden" name="page" value=""/>
+            <input type="hidden" name="pageSize" value=""/>
+            <span><input type="button" value="查询" class="btn1" onclick="ac_btn()"><input type="text" id="action" name="qry" class="SearchBar"/></span>
+    </form>
+    <table class="table table-border table-bordered table-hover radius">
+        <thead>
+        <tr>
+            <th class="col2" nowrap="nowrap">logId</th>
+            <th class="col1">执行类</th>
+            <th class="col3">开始时间</th>
+            <th class="col3">结束时间</th>
+            <th class="col3">返回结果</th>
+            <th class="col3">入参</th>
+            <th class="col3">出参</th>
+            <th class="col3">执行机器</th>
+        </tr>
+        </thead>
+        <tbody id="view">
+        </tbody>
+    </table>
+    <div id="page"></div>
+</section>
+<script id="demo" type="text/html">
+    {{# for(var i = 0, len = d.list.length; i < len; i++){ }}
+    {{# var l = d.list[i]}}
+    <tr class="text-c">
+        <td >{{l.DLOG_ID}}</td>
+        <td nowrap="nowrap">{{l.ACTION_CLASS_NAME}}</td>
+        <td nowrap="nowrap">{{dataFormate('yyyy-MM-dd hh:mm:ss' ,l.PROCESS_START_DATE)}}</td>
+        <td nowrap="nowrap">{{dataFormate('yyyy-MM-dd hh:mm:ss' ,l.PROCESS_END_DATE)}}</td>
+        <td nowrap="nowrap">{{l.RETURN_FLAG}}</td>
+        <td nowrap="nowrap" class="parentTd" logId="{{l.DLOG_ID}}">
+			<a class="detail btn btn-link" href="javascript:void(0); ">{{l.INPUT_FILE}}</a>
+		</td>
+        <td nowrap="nowrap">{{l.OUTPUT_FILE}}</td>
+        <td nowrap="nowrap">{{l.PC_IP}}</td>
+    </tr>
+    {{# } }}
+</script>
+<script type="text/javascript" src="/lib/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="/lib/layer/layer.js"></script>
+<script type="text/javascript" src="/lib/layer/laytpl.js"></script>
+<script type="text/javascript" src="/lib/laypage/laypage.js"></script>
+<script type="text/javascript" src="/static/js/H-ui.js"></script>
+<script type="text/javascript" src="/static/js/H-ui.admin.js"></script>
+<script type="text/javascript" src="/static/js/spinach.js"></script>
+<script>
+    $(function () {
+        initPage("listForm", "demo", "view", "page");
+    })
+
+    $(document).on("click", ".paused", function () {
+        doSomething($(this), "/task/stopJob");
+    });
+    $(document).on("click", ".resume", function () {
+        doSomething($(this), "/task/resume");
+    });
+    $(document).on("click", ".delete", function () {
+        doSomething($(this), "/task/delete");
+    })
+    
+    $(document).on("click", ".detail", function () {
+    	layer_show("日志明细", "/task/apilog/"+$(this).parent(".parentTd").attr("logId")); 
+    })
+    
+    function ac_btn(){
+    	initPage("listForm", "demo", "view", "page");
+    }
+    
+    function doSomething(thisObj, url) {
+        var jobGroup = thisObj.parent(".parentTd").attr("jobGroup");
+        var jobName = thisObj.parent(".parentTd").attr("jobName");
+        $.post(url, {"jobGroup": jobGroup, "jobName": jobName}, function (data) {
+            layer.alert(data.msg, {icon: 6});
+            initPage("listForm", "demo", "view", "page");
+        });
+    }
+</script>
+</body>
+</html>

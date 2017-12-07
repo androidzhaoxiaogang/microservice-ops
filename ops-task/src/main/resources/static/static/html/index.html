@@ -1,0 +1,124 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+    <meta http-equiv="Cache-Control" content="no-siteapp"/>
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="/lib/html5.js"></script>
+    <script type="text/javascript" src="/lib/respond.min.js"></script>
+    <script type="text/javascript" src="/lib/PIE_IE678.js"></script>
+    <![endif]-->
+    <link rel="stylesheet" type="text/css" href="/static/css/H-ui.css"/>
+    <link rel="stylesheet" type="text/css" href="/lib/Hui-iconfont/1.0.7/iconfont.css"/>
+    <link rel="stylesheet" type="text/css" href="/lib/icheck/icheck.css"/>
+    <!--[if lt IE 9]>
+    <link href="/static/css/H-ui.ie.css" rel="stylesheet" type="text/css"/>
+    <![endif]-->
+    <!--[if IE 6]>
+    <script type="text/javascript" src="../lib/DD_belatedPNG_0.0.8a-min.js"></script>
+    <script>DD_belatedPNG.fix('*');</script>
+    <![endif]-->
+    <title>首页</title>
+    <meta name="keywords" content="关键词,5个左右,单个8汉字以内">
+    <meta name="description" content="网站描述，字数尽量空制在80个汉字，160个字符以内！">
+</head>
+<body>
+<header class="navbar-wrapper">
+    <div class="navbar navbar-black navbar-fixed-top">
+        <div class="container cl">
+            <a class="logo navbar-logo hidden-xs" href="#">计划任务调度中心</a>
+            <a class="logo navbar-logo-m visible-xs" href="#"></a>
+            <span class="logo navbar-slogan hidden-xs"></span>
+            <a aria-hidden="false" class="nav-toggle Hui-iconfont visible-xs" href="javascript:;">&#xe667;</a>
+        </div>
+    </div>
+</header>
+<section class="container">
+    <h1>schedule</h1>
+    <div class="line"></div>
+    <div class="cl pd-5 bk-gray mt-10">
+        <form id="listForm" action="/task/list.json"> <span class="l"><a
+                href="javascript:;"
+                onclick="layer_show('添加','/task/add','','500')"
+                class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i>
+            添加</a></span>
+            </form>
+    </div>
+    <table class="table table-border table-bordered table-striped mt-20">
+        <thead>
+        <tr>
+            <th class="col2">任务组</th>
+            <th class="col1">任务名</th>
+            <th class="col3">cron表达式</th>
+            <th class="col3">状态</th>
+            <!-- 
+            <th class="col3">任务执行类名称</th>
+            <th class="col3">任务执行类方法</th>
+             -->
+            <th class="col3">url</th>
+            <th class="col3">描述</th>
+            <th class="col3">操作</th>
+        </tr>
+        </thead>
+        <tbody id="view">
+        </tbody>
+    </table>
+    <div id="page"></div>
+</section>
+<script id="demo" type="text/html">
+    {{# for(var i = 0, len = d.length; i < len; i++){ }}
+    {{# var l = d[i]}}
+    <tr class="text-c">
+        <td>{{l.jobGroup}}</td>
+        <td>{{l.jobName}}</td>
+        <td>{{l.cronExpression}}</td>
+        <td>{{# var a=l.status; if(l.status=='PAUSED'){a='暂停';}else if(l.status=='NORMAL'){a='正常';} }}
+            {{a }}
+        </td>
+        </td>
+
+        <td>{{l.url}}</td>
+        <td>{{l.description}}</td>
+        <td class="parentTd" jobGroup="{{l.jobGroup}}" jobName="{{l.jobName}}">
+            <a class="paused btn  size-MINI btn-secondary radius" href="javascript:void(0); ">暂停</a>
+            <a class="resume btn btn-danger size-MINI radius" href="javascript:void(0); ">恢复</a>
+            <a class="delete btn btn-warning size-MINI radius" href="javascript:void(0); ">删除</a></td>
+    </tr>
+    {{# } }}
+</script>
+<script type="text/javascript" src="/lib/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="/lib/layer/layer.js"></script>
+<script type="text/javascript" src="/lib/layer/laytpl.js"></script>
+<script type="text/javascript" src="/lib/laypage/laypage.js"></script>
+<script type="text/javascript" src="/static/js/H-ui.js"></script>
+<script type="text/javascript" src="/static/js/H-ui.admin.js"></script>
+<script type="text/javascript" src="/static/js/spinach.js"></script>
+<script>
+    $(function () {
+        initPage("listForm", "demo", "view", "page");
+    })
+
+    $(document).on("click", ".paused", function () {
+        doSomething($(this), "/task/stopJob");
+    });
+    $(document).on("click", ".resume", function () {
+        doSomething($(this), "/task/resume");
+    });
+    $(document).on("click", ".delete", function () {
+        doSomething($(this), "/task/delete");
+    })
+    function doSomething(thisObj, url) {
+        var jobGroup = thisObj.parent(".parentTd").attr("jobGroup");
+        var jobName = thisObj.parent(".parentTd").attr("jobName");
+        $.post(url, {"jobGroup": jobGroup, "jobName": jobName}, function (data) {
+            layer.alert(data.msg, {icon: 6});
+            initPage("listForm", "demo", "view", "page");
+        });
+    }
+</script>
+</body>
+</html>
