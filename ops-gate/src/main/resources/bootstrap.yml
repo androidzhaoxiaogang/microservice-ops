@@ -1,23 +1,24 @@
 spring:
   cloud:
     config:
-        discovery:
-           service-id: ace-config
-           enabled: true
-        label: master  # git 分支
-        name: gate
-        profile: dev
-
+      discovery:
+        enabled: true
+        serviceId: server-config
+      name: port,db,redis,gate
+      profile: ${config.profile:dev}
+management:
+  security:
+    enabled: false
 eureka:
     instance:
         statusPageUrlPath: /info
         healthCheckUrlPath: /health
         # docker 部署开启
-#        prefer-ip-address: true
+        prefer-ip-address: true
 #        ip-address: 127.0.0.1
     client:
         serviceUrl:
-            defaultZone: ${eureka.url:http://121.196.193.149:8761/eureka/}
+            defaultZone: ${eureka.url:http://10.180.4.221:8761/eureka/}
                     # docker 部署开启
 #            defaultZone: http://center:8761/eureka/
 
