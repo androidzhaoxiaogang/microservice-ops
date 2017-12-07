@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+	<!-- 文件输出格式 -->
+	<property name="PATTERN"
+		value="%-12(%d{yyyy-MM-dd HH:mm:ss.SSS}) |-%-5level [%thread] %c [%L] -| %msg%n" />
+	<!--文件路径 -->
+	<property name="FILE_PATH" value="logs/" />
+
+
+	<logger name="org.springframework.web.servlet" level="INFO"
+		additivity="true"></logger>
+	<logger name="org.springframework.jdbc" level="INFO"
+		additivity="true"></logger>
+
+	<logger name="com.yonyou" level="debug" />
+
+
+	<!-- 控制台打印 -->
+	<appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>${PATTERN}</pattern>
+		</encoder>
+	</appender>
+	<!-- 每天产生一个文件 -->
+	<appender name="ALLFILE"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<!-- 文件路径 -->
+		<file>${FILE_PATH}/logs.log</file>
+		<rollingPolicy
+			class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+			<!-- 文件名称 -->
+			<fileNamePattern>${FILE_PATH}/logs.%d{yyyy-MM-dd}-%i.log
+			</fileNamePattern>
+			<maxFileSize>10MB</maxFileSize>
+			<maxHistory>100</maxHistory>
+			<totalSizeCap>20GB</totalSizeCap>
+		</rollingPolicy>
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<pattern>${PATTERN}</pattern>
+		</layout>
+	</appender>
+	<appender name="ERRORFILE"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<!-- 文件路径 -->
+		<file>${FILE_PATH}/logs_error.log</file>
+		<rollingPolicy
+			class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+			<!-- 文件名称 -->
+			<fileNamePattern>${FILE_PATH}/logs_error.%d{yyyy-MM-dd}-%i.log
+			</fileNamePattern>
+			<maxFileSize>10MB</maxFileSize>
+			<maxHistory>100</maxHistory>
+			<totalSizeCap>20GB</totalSizeCap>
+		</rollingPolicy>
+		<append>true</append>
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<pattern>${PATTERN}</pattern>
+		</layout>
+		<!-- 此日志文件只记录error级别的 -->
+		<filter class="ch.qos.logback.classic.filter.LevelFilter">
+			<level>ERROR</level>
+			<onMatch>ACCEPT</onMatch>
+			<onMismatch>DENY</onMismatch>
+		</filter>
+	</appender>
+	<appender name="WARNFILE"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<!-- 文件路径 -->
+		<file>${FILE_PATH}/logs_warn.log</file>
+		<rollingPolicy
+			class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+			<!-- 文件名称 -->
+			<fileNamePattern>${FILE_PATH}/logs_warn.%d{yyyy-MM-dd}-%i.log
+			</fileNamePattern>
+			<maxFileSize>10MB</maxFileSize>
+			<maxHistory>100</maxHistory>
+			<totalSizeCap>20GB</totalSizeCap>
+		</rollingPolicy>
+		<append>true</append>
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<pattern>${PATTERN}</pattern>
+		</layout>
+		<!-- 此日志文件记录warn级别以及以上 -->
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+			<level>WARN</level>
+		</filter>
+	</appender>
+	<root level="INFO">
+		<appender-ref ref="ALLFILE" />
+		<appender-ref ref="CONSOLE" />
+		<appender-ref ref="ERRORFILE" />
+		<appender-ref ref="WARNFILE" />
+	</root>
+
+	<jmxConfigurator/>
+</configuration>
