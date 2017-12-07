@@ -100,7 +100,7 @@ logging:
 auth:
   serviceId: auth-service
   user:
-    token-header: Authorization
+    token-header: Authorization ##所有业务的请求头使用这个来传递JWT
     pub-key:
       path: jwt/pub.key
   client:

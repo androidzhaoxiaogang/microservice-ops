@@ -81,8 +81,7 @@ public class PermissionService {
             }
             info.setUri(uri);
             info.setMethod(AdminCommonConstant.RESOURCE_REQUEST_METHOD_GET);
-            result.add(info
-            );
+            result.add(info);
             info.setMenu(menu.getTitle());
         }
     }

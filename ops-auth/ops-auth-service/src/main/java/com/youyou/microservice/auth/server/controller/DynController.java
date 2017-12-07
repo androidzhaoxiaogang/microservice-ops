@@ -26,6 +26,12 @@ import com.yonyou.microservice.gate.common.vo.user.AuthProviderInfo;
 import com.youyou.microservice.auth.server.entity.AuthProvider;
 import com.youyou.microservice.auth.server.util.user.JwtTokenUtil;
 
+/**
+ * 动态controller
+ * 
+ * @author joy
+ *
+ */
 public class DynController implements Controller{
 	private static Logger logger=Logger.getLogger(DynController.class);
 	public static final String ACCEPT_USER="user";
