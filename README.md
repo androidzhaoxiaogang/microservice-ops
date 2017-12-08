@@ -21,7 +21,7 @@
 
 ## 模块大致说明（从左向右）
 
-* **平台业务部分**，参考 [这个项目](https://github.com/yonyou-auto-dev/microservice-ops-ui)，使用VUE+ELementUI实现运维的界面，前后端分离。
+* **平台UI部分**，参考 [这个项目](https://github.com/yonyou-auto-dev/microservice-ops-ui)，使用VUE+ELementUI实现运维的界面，前后端分离。
 
 * **网关服务 ops-gate：**  
 	基于SpringCloud Netflix Zuul开发，实现了基于JWT的权限认证(也支持业务自行认证，只由网关代理JWT)、URL鉴权、动态路由、动态filter。
