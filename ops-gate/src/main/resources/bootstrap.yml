@@ -11,8 +11,8 @@ management:
     enabled: false
 eureka:
     instance:
-        statusPageUrlPath: /info
-        healthCheckUrlPath: /health
+#        statusPageUrlPath: /info
+#        healthCheckUrlPath: /health
         # docker 部署开启
         prefer-ip-address: true
 #        ip-address: 127.0.0.1

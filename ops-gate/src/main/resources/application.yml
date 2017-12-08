@@ -10,16 +10,16 @@ spring:
         default-property-inclusion: non_null
     redis:
         database: 1
-        host: 10.180.8.220
+        host: ${redis.host:10.180.8.220}
         pool:
             max-active: 20
     datasource:
        driverClassName: com.mysql.jdbc.Driver
-       url: jdbc:mysql://10.180.8.205:3306/ag_admin?useUnicode=true&amp;characterEncoding=utf8mb4
-       username: root
-       password: rcs
+       url: ${db.yc_base.url:jdbc:mysql://10.180.8.205:3306/yc_base?useUnicode=true&amp;characterEncoding=utf8mb4}
+       username: ${db.yc_base.username:root}
+       password: ${db.yc_base.pwd:rcs}
 server:
-    port: 8766 #启动端口
+    port: ${ops.gate.port:8766} #启动端口
 
 #
 zuul:
@@ -59,9 +59,9 @@ zuul:
 
   db:
     name: test
-    url: jdbc:mysql://10.180.8.205:3306/ag_admin?useUnicode=true&characterEncoding=UTF8
-    username: root
-    password: rcs
+    url: ${db.yc_base.url:jdbc:mysql://10.180.8.205:3306/yc_base?useUnicode=true&amp;characterEncoding=utf8mb4}
+    username: ${db.yc_base.username:root}
+    password: ${db.yc_base.pwd:rcs}
     type: com.alibaba.druid.pool.DruidDataSource
     driver-class-name: com.mysql.jdbc.Driver
     basepackage: com.yonyou.cloud.zuul.db.mapper
@@ -100,7 +100,7 @@ logging:
 auth:
   serviceId: auth-service
   user:
-    token-header: Authorization
+    token-header: Authorization ##所有业务的请求头使用这个来传递JWT
     pub-key:
       path: jwt/pub.key
   client:
@@ -111,13 +111,13 @@ auth:
       path: client/pub.key
 groovy:
   filter:
-    path: D:\\Del\\groovy\\
-    interval: 60
+    path: ${groovy.path:D:\\Del\\groovy\\}
+    interval: ${groovy.interval:60}
   db:
     name: test
-    url: jdbc:mysql://10.180.8.205:3306/ag_admin?useUnicode=true&characterEncoding=UTF8
-    username: root
-    password: rcs
+    url: ${db.yc_base.url:jdbc:mysql://10.180.8.205:3306/yc_base?useUnicode=true&amp;characterEncoding=utf8mb4}
+    username: ${db.yc_base.username:root}
+    password: ${db.yc_base.pwd:rcs}
     type: com.alibaba.druid.pool.DruidDataSource
     driver-class-name: com.mysql.jdbc.Driver
     basepackage: com.yonyou.microservice.filter.mapper

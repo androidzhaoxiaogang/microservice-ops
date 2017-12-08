@@ -41,7 +41,9 @@ import com.yonyou.microservice.gate.server.utils.DBLog;
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * ${DESCRIPTION}
+ * gateway filter
+ * filter type pre
+ * 可以通过配置 gate.ignore.startWith 来忽略经过过滤器的请求
  *
  * @author joy
  * @create 2017-06-23 8:25
@@ -55,6 +57,7 @@ public class AdminAccessFilter extends ZuulFilter {
 
     @Autowired
     private IUserService userService;
+    
     @Autowired
     private ILogService logService;
 
@@ -63,6 +66,7 @@ public class AdminAccessFilter extends ZuulFilter {
 
     @Value("${zuul.prefix}")
     private String zuulPrefix;
+    
     @Autowired
     private UserAuthUtil userAuthUtil;
 
@@ -74,17 +78,17 @@ public class AdminAccessFilter extends ZuulFilter {
 
     @Autowired
     private ServiceAuthUtil serviceAuthUtil;
+    
     @Autowired
     RequestMappingHandlerMapping mapping1;
+    
     @Autowired
     IIgnoreUriService iIgnoreUriService;
+    
     private List<IgnoreUriInfo> startWithList;
     
     
     public AdminAccessFilter(){
-//    	RequestMappingInfo info=new RequestMappingInfo(null,null);
-//    	mapping2.s
-//    	mapping.registerMapping(info, this, null);
     	logger.info("--AdminAccessFilter对象创建");
     }
 
@@ -117,8 +121,9 @@ public class AdminAccessFilter extends ZuulFilter {
         }
         IJWTInfo user = null;
         try {
-            user = getJWTUser(request,ctx);
+            user = getJWTUser(request,ctx);//从JWT中解析出用户信息
         } catch (Exception e) {
+        	//TODO 如果jwt中的用户信息获取失败，这块返回信息可能要改成统一的response格式
             setFailedRequest(JSON.toJSONString(new TokenErrorResponse(e.getMessage())),200);
             return null;
         }
@@ -167,7 +172,10 @@ public class AdminAccessFilter extends ZuulFilter {
     }
 
     /**
-     * 返回session中的用户信息
+     * 从header中取到JWT
+     * 优先从header中取
+     * 没有就从参数中取token参数
+     * 
      * @param request
      * @param ctx
      * @return
@@ -178,6 +186,7 @@ public class AdminAccessFilter extends ZuulFilter {
             authToken = request.getParameter("token");
         }
         ctx.addZuulRequestHeader(userAuthConfig.getTokenHeader(),authToken);
+        //将token放到threadlocal中
         BaseContextHandler.setToken(authToken);
         return userAuthUtil.getInfoFromToken(authToken);
     }
