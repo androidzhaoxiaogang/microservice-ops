@@ -49,7 +49,7 @@ public class MqMessageService extends EsBaseService<MqMessage>{
 				||(MqMessageStatus.PRODUCED.name().equals(oldMessage.getStatus()) && MqMessageType.CONSUMER == mqMessageType)){
 			logger.error("this message status is success,msgkey:{}", mqMessage.getMsgKey());
 		} else {
-			update(MqOpsConstant.INDEX, mqMessage, mqMessage.getMsgKey());
+			update(MqOpsConstant.INDEX, mqMessage, oldMessage.getEsId());
 		}
 	}
 } 

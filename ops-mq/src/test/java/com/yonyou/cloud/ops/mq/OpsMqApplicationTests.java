@@ -21,9 +21,11 @@ import com.xiaoleilu.hutool.json.JSONUtil;
 import com.yonyou.cloud.common.beans.PageResultResponse;
 import com.yonyou.cloud.ops.mq.common.MqOpsConstant;
 import com.yonyou.cloud.ops.mq.dao.MqDataApi;
+import com.yonyou.cloud.ops.mq.entity.MqConsumer;
 import com.yonyou.cloud.ops.mq.entity.MqData;
 import com.yonyou.cloud.ops.mq.entity.MqMessage;
 import com.yonyou.cloud.ops.mq.entity.MqProducer;
+import com.yonyou.cloud.ops.mq.service.MqConsumerService;
 import com.yonyou.cloud.ops.mq.service.MqMessageService;
 import com.yonyou.cloud.ops.mq.service.MqProducerService;
 
@@ -110,12 +112,14 @@ public class OpsMqApplicationTests {
 //		mqProducerService.update("mq",pro, "AV_JMnIaZG64QQzzpAPt");
 		
 //		System.out.println("data===="+mqProducerService.selectOne("mq", "_type:"));
-		System.out.println("dataList===="+mqProducerService.selectList("mq", "msg:msg AND msgKey:bb*").size());
+		System.out.println("dataList===="+mqProducerService.selectList("mq", "msgKey:aa* AND host:localhost").size());
 		
 	}
 	
 	@Autowired
 	private MqMessageService mqMessageService;
+	@Autowired
+	private MqConsumerService mqConsumerService;
 	@Test
 	public void mqMessageServiceTest(){
 		MqMessage m = mqMessageService.selectOne(MqOpsConstant.INDEX, "msgKey:b2c7ff05-9732-4fd9-9bfa-ab43129cd906");
@@ -127,5 +131,20 @@ public class OpsMqApplicationTests {
 			e.printStackTrace();
 		}
 		System.out.println(JSONUtil.toJsonPrettyStr(m));
+	}
+	
+	@Test
+	public void insertTest(){
+		MqMessage mqMessage = new MqMessage();
+		mqMessage.setMsgKey("aaaaa");
+		MqConsumer mqConsumer = new MqConsumer();
+		mqConsumer.setMsgKey("aaaaa");
+		try {
+			mqConsumerService.insert(MqOpsConstant.INDEX, mqConsumer);
+			mqMessageService.insert(MqOpsConstant.INDEX, mqMessage);
+		} catch (JsonProcessingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

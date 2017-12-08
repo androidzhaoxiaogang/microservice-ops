@@ -16,6 +16,12 @@ public class MqMessage {
 	
 	private Long occurTime;	
 	
+	private String exchangeName;
+	
+	private String routingKey;
+	
+	private String sender;
+	
 	private Integer consumeFailTimes = 0;
 	
 	private Integer produceFailTimes = 0;
@@ -122,4 +128,28 @@ public class MqMessage {
 		this.esId = esId;
 	}
 
+	public String getExchangeName() {
+		return exchangeName;
+	}
+
+	public void setExchangeName(String exchangeName) {
+		this.exchangeName = exchangeName;
+	}
+
+	public String getRoutingKey() {
+		return routingKey;
+	}
+
+	public void setRoutingKey(String routingKey) {
+		this.routingKey = routingKey;
+	}
+
+	public String getSender() {
+		return sender;
+	}
+
+	public void setSender(String sender) {
+		this.sender = sender;
+	}
+	
 }
