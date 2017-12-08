@@ -24,10 +24,13 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
+<<<<<<< HEAD
+=======
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-config</artifactId>
+>>>>>>> 84919d14905287f88df287cb90dcfdd09675d644
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
