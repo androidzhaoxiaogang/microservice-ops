@@ -44,7 +44,7 @@
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-undertow</artifactId>
+			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
@@ -150,14 +150,9 @@
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 		
-		
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-config</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-eureka</artifactId>
 		</dependency>
 	</dependencies>
 
@@ -175,6 +170,7 @@
 	</dependencyManagement>
   	
 	<build>
+		<finalName>ops-admin</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
