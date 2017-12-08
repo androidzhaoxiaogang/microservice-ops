@@ -15,8 +15,7 @@
 ## 整体架构
 ![](https://github.com/yonyou-auto-dev/microservice-ops/blob/master/model.jpg)
 
-**绿色部分为运维平台会代理的部分  
-从左向右，所有请求会经过网关统一认证，鉴权，限流后再转发到相应的业务模块。 **
+**绿色部分为运维平台会代理的部分从左向右，所有请求会经过网关统一认证，鉴权，限流后再转发到相应的业务模块。**
 
 **蓝色部分是微服务的基础server层，参考这个[server项目](https://github.com/yonyou-auto-dev/microservice-server)**
 
