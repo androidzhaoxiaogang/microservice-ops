@@ -73,10 +73,20 @@ public class MqOpsController {
 		}
 	};
 	
+//	@RequestMapping(value="/page",method=RequestMethod.POST)
+//	@YcApi
+//	public PageResultResponse<MqProducer> queryByPage(@RequestBody ESPageQuery query){
+//		return mqProducerService.pageQuery(query,query.getIndex());
+//	}
+	
 	@RequestMapping(value="/page",method=RequestMethod.POST)
 	@YcApi
-	public PageResultResponse<MqProducer> queryByPage(@RequestBody ESPageQuery query){
-		return mqProducerService.pageQuery(query,query.getIndex());
+	public PageResultResponse<MqMessage> queryByPage(@RequestBody MqQueryRequestDto request){
+		ESPageQuery query = new ESPageQuery();
+		BeanUtils.copyProperties(request, query);
+		String[] fieldNames = Arrays.asList(MqQueryRequestDto.class.getDeclaredFields()).stream().map(field -> field.getName()).collect(Collectors.toList()).toArray(new String[0]);
+		query.setQueryString(toQueryString(request, fieldNames));
+		return mqMessageService.pageQuery(query, MqOpsConstant.INDEX);
 	}
 	
 	@RequestMapping(value="/list",method=RequestMethod.GET)

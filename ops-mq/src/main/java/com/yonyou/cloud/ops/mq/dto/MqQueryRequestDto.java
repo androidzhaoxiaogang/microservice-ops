@@ -1,8 +1,9 @@
 package com.yonyou.cloud.ops.mq.dto;
 
+import com.yonyou.cloud.common.service.utils.ESPageQuery;
 import com.yonyou.cloud.ops.mq.common.MqMessageStatus;
 
-public class MqQueryRequestDto {
+public class MqQueryRequestDto extends ESPageQuery {
 	
 	private String host;
 	

@@ -53,6 +53,9 @@ zuul:
     wechat:
       path: /wechat/**
       serviceId: wechat-service
+    message:
+      path: /message/**
+      serviceId: ops-mq
   store:
     mysql:
       enabled: true
