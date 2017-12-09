@@ -29,7 +29,7 @@ zuul:
   ratelimit: # 网关限流
     key-prefix: gate_rate
     enabled: true
-    repository: REDIS #REDIS, JPA, IN_MEMORY
+    repository: IN_MEMORY #REDIS, JPA, IN_MEMORY
     behind-proxy: true
     default-policy: #optional - will apply unless specific policy exists
       limit: 10
