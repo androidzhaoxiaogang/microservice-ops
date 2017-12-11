@@ -15,12 +15,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.github.pagehelper.util.StringUtil;
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 import com.yonyou.cloud.common.annotation.YcApi;
 import com.yonyou.cloud.common.beans.PageResultResponse;
 import com.yonyou.cloud.common.beans.RestResultResponse;
 import com.yonyou.cloud.common.service.utils.ESPageQuery;
+import com.yonyou.cloud.ops.mq.common.MqMessageStatus;
 import com.yonyou.cloud.ops.mq.common.MqOpsConstant;
 import com.yonyou.cloud.ops.mq.dto.MqConsumerDto;
 import com.yonyou.cloud.ops.mq.dto.MqMessageResponseDto;
@@ -69,10 +71,13 @@ public class MqOpsController {
 		public MqMessageResponseDto apply(MqMessage message) {
 			MqMessageResponseDto response = new MqMessageResponseDto();
 			BeanUtils.copyProperties(message, response);
+			if(StringUtil.isNotEmpty(response.getSuccess()))
+				response.setSuccess(Boolean.valueOf(response.getSuccess())?"是":"否");
+			if(StringUtil.isNotEmpty(response.getStatus()))
+				response.setStatus(MqMessageStatus.valueOf(response.getStatus()).getName());
 			return response;
 		}
 	};
-	
 //	@RequestMapping(value="/page",method=RequestMethod.POST)
 //	@YcApi
 //	public PageResultResponse<MqProducer> queryByPage(@RequestBody ESPageQuery query){
@@ -81,12 +86,27 @@ public class MqOpsController {
 	
 	@RequestMapping(value="/page",method=RequestMethod.POST)
 	@YcApi
-	public PageResultResponse<MqMessage> queryByPage(@RequestBody MqQueryRequestDto request){
+	public PageResultResponse<MqMessageResponseDto> queryByPage(@RequestBody MqQueryRequestDto request){
+		PageResultResponse<MqMessageResponseDto> pageResultResponse = new PageResultResponse<MqMessageResponseDto>();
 		ESPageQuery query = new ESPageQuery();
 		BeanUtils.copyProperties(request, query);
 		String[] fieldNames = Arrays.asList(MqQueryRequestDto.class.getDeclaredFields()).stream().map(field -> field.getName()).collect(Collectors.toList()).toArray(new String[0]);
 		query.setQueryString(toQueryString(request, fieldNames));
-		return mqMessageService.pageQuery(query, MqOpsConstant.INDEX);
+		PageResultResponse<MqMessage> pageResult = mqMessageService.pageQuery(query, MqOpsConstant.INDEX);
+		BeanUtils.copyProperties(pageResult, pageResultResponse);
+		List<MqMessageResponseDto> dto = Lists.transform(pageResult.getData().getRows(), mqMessage2Dto);
+		pageResultResponse.getData().setRows(dto);
+		return pageResultResponse;
+	}
+	
+	@RequestMapping(value="/consumedInfo/list/{msgKey}",method=RequestMethod.GET)
+	@YcApi
+	public RestResultResponse<List<MqConsumeDetailInfo>> queryConsumedInfos(@PathVariable("msgKey") String msgKey){
+		RestResultResponse<List<MqConsumeDetailInfo>> response = new RestResultResponse<List<MqConsumeDetailInfo>>();
+		List<MqConsumeDetailInfo> details = mqConsumeDetailInfoService.selectList(MqOpsConstant.INDEX, "msgKey:"+msgKey);
+		response.setData(details);
+		response.setSuccess(true);
+		return response;
 	}
 	
 	@RequestMapping(value="/list",method=RequestMethod.GET)
